@@ -1,13 +1,400 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<!-- Add CSS at the head of HTML file -->
-    <link rel="stylesheet" href="./css/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Layer Perceptron: Backpropagation Visualizer</title>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-		<!-- Your code goes here-->
+    <div class="simulation-container">
+        <!-- Step Indicator Sidebar -->
+        <aside class="step-sidebar">
+            <div class="step-sidebar-header">
+                <h3>Experiment Steps</h3>
+            </div>
+            <div class="step-list">
+                <div class="step-item active unlocked idle" data-step="1">
+                    <div class="step-indicator">
+                        <span class="step-number">1</span>
+                    </div>
+                    <div class="step-content-wrapper">
+                        <span class="step-title">Import Libraries</span>
+                    </div>
+                </div>
+                <div class="step-item" data-step="2">
+                    <div class="step-indicator">
+                        <span class="step-number">2</span>
+                    </div>
+                    <div class="step-content-wrapper">
+                        <span class="step-title">Load Dataset</span>
+                    </div>
+                </div>
+                <div class="step-item" data-step="3">
+                    <div class="step-indicator">
+                        <span class="step-number">3</span>
+                    </div>
+                    <div class="step-content-wrapper">
+                        <span class="step-title">Initialize Parameters</span>
+                    </div>
+                </div>
+                <div class="step-item" data-step="4">
+                    <div class="step-indicator">
+                        <span class="step-number">4</span>
+                    </div>
+                    <div class="step-content-wrapper">
+                        <span class="step-title">Model Building</span>
+                    </div>
+                </div>
+                <div class="step-item" data-step="5">
+                    <div class="step-indicator">
+                        <span class="step-number">5</span>
+                    </div>
+                    <div class="step-content-wrapper">
+                        <span class="step-title">Model Training</span>
+                    </div>
+                </div>
+                <div class="step-item" data-step="6">
+                    <div class="step-indicator">
+                        <span class="step-number">6</span>
+                    </div>
+                    <div class="step-content-wrapper">
+                        <span class="step-title">Model Evaluation</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
+        <!-- Main Notebook Area -->
+        <main class="notebook-area">
+            <!-- Header -->
+            <div class="notebook-header">
+                <h1>Multi-Layer Perceptron: Backpropagation Visualizer</h1>
+                <p class="notebook-subtitle">Interactive Neural Network Training on Iris Dataset</p>
+            </div>
+
+            <!-- Step 1: Import Libraries -->
+            <div class="step-content active" id="step-1">
+                <div class="content-grid">
+                    <div class="code-panel">
+                        <div class="code-block">
+                            <pre><code><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+
+<span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split
+<span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler, LabelBinarizer
+<span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> classification_report, confusion_matrix
+
+<span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf
+<span class="keyword">from</span> tensorflow.keras <span class="keyword">import</span> Model
+<span class="keyword">from</span> tensorflow.keras.layers <span class="keyword">import</span> Dense, Input
+<span class="keyword">from</span> tensorflow.keras.utils <span class="keyword">import</span> plot_model
+<span class="keyword">from</span> IPython.display <span class="keyword">import</span> Image, display</code></pre>
+                        </div>
+                        <button class="run-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            Run
+                        </button>
+                    </div>
+                    <div class="output-panel">
+                        <div class="output-box">
+                            <div class="output-text" id="output-1" style="display: none;">✓ Libraries imported successfully</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Load Dataset -->
+            <div class="step-content" id="step-2">
+                <div class="content-grid">
+                    <div class="code-panel">
+                        <div class="code-block">
+                            <pre><code>FILE_PATH = <span class="string">"Iris.csv"</span>
+data = pd.read_csv(FILE_PATH)
+<span class="keyword">if</span> <span class="string">"Id"</span> <span class="keyword">in</span> data.columns:
+    data = data.drop(<span class="string">"Id"</span>, axis=<span class="number">1</span>)
+    
+<span class="builtin">print</span>(<span class="string">"Shape:"</span>, data.shape)
+display(data.head())
+<span class="builtin">print</span>(data[<span class="string">"Species"</span>].value_counts())</code></pre>
+                        </div>
+                        <button class="run-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            Run
+                        </button>
+                    </div>
+                    <div class="output-panel">
+                        <div class="output-box">
+                            <div id="output-2" style="display: none;">
+                                <div class="output-text">Shape: (150, 5)</div>
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>SepalLengthCm</th>
+                                            <th>SepalWidthCm</th>
+                                            <th>PetalLengthCm</th>
+                                            <th>PetalWidthCm</th>
+                                            <th>Species</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>0</td><td>5.1</td><td>3.5</td><td>1.4</td><td>0.2</td><td>Iris-setosa</td></tr>
+                                        <tr><td>1</td><td>4.9</td><td>3.0</td><td>1.4</td><td>0.2</td><td>Iris-setosa</td></tr>
+                                        <tr><td>2</td><td>4.7</td><td>3.2</td><td>1.3</td><td>0.2</td><td>Iris-setosa</td></tr>
+                                        <tr><td>3</td><td>4.6</td><td>3.1</td><td>1.5</td><td>0.2</td><td>Iris-setosa</td></tr>
+                                        <tr><td>4</td><td>5.0</td><td>3.6</td><td>1.4</td><td>0.2</td><td>Iris-setosa</td></tr>
+                                    </tbody>
+                                </table>
+                                <div class="output-text" style="margin-top: 15px;">
+                                    Iris-setosa: 50<br>
+                                    Iris-versicolor: 50<br>
+                                    Iris-virginica: 50
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Initialize Parameters -->
+            <div class="step-content" id="step-3">
+                <div class="content-grid">
+                    <div class="code-panel">
+                        <div class="code-block">
+                            <pre><code>X = data.drop(<span class="string">"Species"</span>, axis=<span class="number">1</span>).values
+y_species = data[<span class="string">"Species"</span>]
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+binarizer = LabelBinarizer()
+y_encoded = binarizer.fit_transform(y_species)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y_encoded, test_size=<span class="number">0.2</span>, 
+    random_state=<span class="number">42</span>, stratify=y_encoded)
+
+<span class="builtin">print</span>(<span class="string">"Train Shape:"</span>, X_train.shape)
+<span class="builtin">print</span>(<span class="string">"Test Shape:"</span>, X_test.shape)
+<span class="builtin">print</span>(<span class="string">"Classes:"</span>, binarizer.classes_)</code></pre>
+                        </div>
+                        <button class="run-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            Run
+                        </button>
+                    </div>
+                    <div class="output-panel">
+                        <div class="output-box">
+                            <div class="output-text" id="output-3" style="display: none;">
+                                Train Shape: (120, 4)<br>
+                                Test Shape: (30, 4)<br>
+                                Classes: ['Iris-setosa' 'Iris-versicolor' 'Iris-virginica']
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Model Building -->
+            <div class="step-content" id="step-4">
+                <div class="content-grid">
+                    <div class="code-panel">
+                        <div class="code-block">
+                            <pre><code>input_dim = <span class="number">4</span>
+
+inputs = Input(shape=(input_dim,))
+x1 = Dense(<span class="number">10</span>, activation=<span class="string">"relu"</span>)(inputs)
+x2 = Dense(<span class="number">8</span>, activation=<span class="string">"relu"</span>)(x1)
+outputs = Dense(<span class="number">3</span>, activation=<span class="string">"softmax"</span>)(x2)
+
+model = Model(inputs, outputs)
+model.compile(
+    optimizer=tf.keras.optimizers.Adam(<span class="number">0.001</span>),
+    loss=<span class="string">"categorical_crossentropy"</span>,
+    metrics=[<span class="string">"accuracy"</span>]
+)
+
+model.summary()</code></pre>
+                        </div>
+                        <button class="run-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            Run
+                        </button>
+                    </div>
+                    <div class="output-panel">
+                        <div class="output-box">
+                            <div id="output-4" style="display: none;">
+                                <div class="architecture-visual" id="architecture"></div>
+                                <div class="output-text" style="margin-top: 15px;">
+                                    Total params: 165 (660.00 B)<br>
+                                    Trainable params: 165 (660.00 B)<br>
+                                    Non-trainable params: 0 (0.00 B)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5: Model Training -->
+            <div class="step-content" id="step-5">
+                <div class="content-grid">
+                    <div class="code-panel">
+                        <div class="code-block" id="trainingCodeBlock">
+                            <pre id="trainingCode"><code>history = model.fit(
+    X_train, y_train,
+    epochs=<span class="highlight">50</span>,
+    batch_size=<span class="highlight">8</span>,
+    validation_split=<span class="number">0.1</span>,
+    verbose=<span class="number">0</span>
+)
+
+model.compile(
+    optimizer=tf.keras.optimizers.<span class="highlight">SGD</span>(
+        learning_rate=<span class="highlight">0.01</span>
+    ),
+    loss=<span class="string">"categorical_crossentropy"</span>,
+    metrics=[<span class="string">"accuracy"</span>]
+)
+
+<span class="builtin">print</span>(<span class="string">"Training Completed!"</span>)</code></pre>
+                        </div>
+                        
+                        <div class="training-controls">
+                            <div class="control-group">
+                                <label>Epochs:</label>
+                                <select id="epochs" class="param-select">
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label>Batch Size:</label>
+                                <select id="batchSize" class="param-select">
+                                    <option value="8">8</option>
+                                    <option value="16">16</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label>Optimizer:</label>
+                                <select id="optimizer" class="param-select">
+                                    <option value="SGD">SGD</option>
+                                    <option value="Adam">Adam</option>
+                                    <option value="RMSprop">RMSprop</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label>Learning Rate:</label>
+                                <select id="learningRate" class="param-select">
+                                    <option value="0.01">0.01</option>
+                                    <option value="0.0005">0.0005</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button class="run-btn" id="trainBtn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            Run
+                        </button>
+                    </div>
+                    <div class="output-panel">
+                        <div class="output-box">
+                            <div id="output-5" style="display: none;">
+                                <canvas id="networkCanvas"></canvas>
+                                <div class="training-metrics">
+                                    <div class="metric-box">
+                                        <div class="metric-label">Epoch</div>
+                                        <div class="metric-value" id="currentEpoch">0</div>
+                                    </div>
+                                    <div class="metric-box">
+                                        <div class="metric-label">Loss</div>
+                                        <div class="metric-value" id="lossValue">-</div>
+                                    </div>
+                                    <div class="metric-box">
+                                        <div class="metric-label">Accuracy</div>
+                                        <div class="metric-value" id="accuracy">-</div>
+                                    </div>
+                                </div>
+                                <div class="output-text" id="trainingStatus">Ready to train...</div>
+                                <div id="step5-bottom-nav" style="display: none; margin-top: 20px; text-align: right; border-top: 1px solid #eee; padding-top: 15px;">
+    <button id="btnNextStep5" class="run-btn completed" style="margin-left: auto; display: inline-flex;">
+        Proceed to Evaluation →
+    </button>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6: Model Evaluation -->
+            <div class="step-content" id="step-6">
+                <div class="content-grid">
+                    <div class="code-panel">
+                        <div class="code-block">
+                            <pre><code>y_true = binarizer.inverse_transform(y_test)
+y_pred = binarizer.inverse_transform(
+    model.predict(X_test, verbose=<span class="number">0</span>)
+)
+
+report = pd.DataFrame(
+    classification_report(y_true, y_pred, output_dict=<span class="keyword">True</span>)
+).transpose()
+
+display(report)
+
+<span class="comment"># Confusion Matrix</span>
+cm = confusion_matrix(y_true, y_pred)
+plt.figure(figsize=(<span class="number">6</span>,<span class="number">5</span>))
+plt.imshow(cm, cmap=<span class="string">"Blues"</span>)
+plt.title(<span class="string">"Confusion Matrix"</span>)
+plt.colorbar()
+plt.show()</code></pre>
+                        </div>
+                        <button class="run-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            Run
+                        </button>
+                    </div>
+                    <div class="output-panel">
+                        <div class="output-box">
+                            <div id="output-6" style="display: none;">
+                                <table class="results-table" id="resultsTable">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>precision</th>
+                                            <th>recall</th>
+                                            <th>f1-score</th>
+                                            <th>support</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="resultsTableBody">
+                                    </tbody>
+                                </table>
+                                <div class="confusion-matrix" id="confusionMatrix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

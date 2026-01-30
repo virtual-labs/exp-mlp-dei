@@ -1,1 +1,1 @@
-## Experiment name
+## Feedforward Neural Network (MLP)

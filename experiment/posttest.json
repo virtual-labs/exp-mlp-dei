@@ -2,37 +2,173 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "How many input features does the Iris dataset have in this experiment?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Two",
+        "b": "Four",
+        "c": "Three",
+        "d": "Five"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Incorrect because Iris has more than two features.",
+        "b": "Correct because Sepal Length, Sepal Width, Petal Length, and Petal Width are used.",
+        "c": "Incorrect because there are four numeric features, not three.",
+        "d": "Incorrect because five would include the label column, but inputs are four."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Which of the following best describes the Iris dataset class distribution?",
+      "answers": {
+        "a": "Balanced",
+        "b": "Imbalanced",
+        "c": "Skewed",
+        "d": "Sparse"
+      },
+      "explanations": {
+        "a": "Correct because each of the three classes has exactly 50 instances, giving equal class counts.",
+        "b": "Incorrect because imbalanced implies unequal class counts, which is not the case here.",
+        "c": "Incorrect because skewed suggests a heavy bias toward one or more classes, which does not apply.",
+        "d": "Incorrect because sparse refers to feature/data sparsity, not equal class counts."
       },
       "correctAnswer": "a",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "What does stratify ensure when splitting a classification dataset?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Shuffle",
+        "b": "Balance",
+        "c": "Scale",
+        "d": "Encode"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Incorrect because shuffles randomize order, not preserve class proportions.",
+        "b": "Correct because stratify preserves class distribution proportions across splits.",
+        "c": "Incorrect because scaling changes feature magnitudes, not class ratios.",
+        "d": "Incorrect because encoding changes label representation, not split composition."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Which technique checks the correctness of backpropagation gradients numerically?",
+      "answers": {
+        "a": "Dropout",
+        "b": "Gradient-check",
+        "c": "BatchNorm",
+        "d": "EarlyStop"
+      },
+      "explanations": {
+        "a": "Incorrect because dropout is a regularization method, not a gradient check.",
+        "b": "Correct because gradient checking numerically verifies analytic gradients from backprop.",
+        "c": "Incorrect because batch normalization stabilizes activations, not verifying gradients.",
+        "d": "Incorrect because early stopping halts training, not used for gradient verification."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "How many hidden layers does the MLP architecture contain?",
+      "answers": {
+        "a": "One",
+        "b": "Two",
+        "c": "Three",
+        "d": "Zero"
+      },
+      "explanations": {
+        "a": "Incorrect because the model uses two hidden layers.",
+        "b": "Correct because the architecture specifies two dense hidden layers.",
+        "c": "Incorrect because only two hidden layers are used.",
+        "d": "Incorrect because the network includes hidden layers."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Which loss function is appropriate for the compiled MLP on one-hot labels?",
+      "answers": {
+        "a": "MSE",
+        "b": "Hinge",
+        "c": "Categorical_crossentropy",
+        "d": "MAE"
+      },
+      "explanations": {
+        "a": "Incorrect because mean squared error is not ideal for multiclass classification with probabilities.",
+        "b": "Incorrect because hinge loss is for margin classifiers, not softmax outputs.",
+        "c": "Correct because categorical crossentropy matches softmax outputs with one-hot labels.",
+        "d": "Incorrect because mean absolute error is not standard for multiclass classification."
       },
       "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "What activation is typically used in the output layer for this 3-class problem?",
+      "answers": {
+        "a": "ReLU",
+        "b": "Sigmoid",
+        "c": "Softmax",
+        "d": "Tanh"
+      },
+      "explanations": {
+        "a": "Incorrect because ReLU is for hidden layers, not multiclass outputs.",
+        "b": "Incorrect because sigmoid is for binary outputs, not softmax multiclass.",
+        "c": "Correct because softmax produces class probabilities for multiclass classification.",
+        "d": "Incorrect because tanh is not suitable for producing class probability distributions."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Which technique reduces overfitting by adding a penalty proportional to square weights?",
+      "answers": {
+        "a": "Dropout",
+        "b": "L2",
+        "c": "L1",
+        "d": "BatchNorm"
+      },
+      "explanations": {
+        "a": "Incorrect because dropout randomly disables units, not adding weight penalties.",
+        "b": "Correct because L2 regularization (weight decay) penalizes the squared magnitude of weights.",
+        "c": "Incorrect because L1 penalizes absolute weights and encourages sparsity, not squared penalty.",
+        "d": "Incorrect because batch normalization normalizes activations, not directly penalize weights."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Which optimizers are compared to finding the best accuracy?",
+      "answers": {
+        "a": "Evolutionary",
+        "b": "RMSprop/SGD/Adam",
+        "c": "Bayesian",
+        "d": "Random"
+      },
+      "explanations": {
+        "a": "Incorrect because evolutionary optimizers are not part of the comparison.",
+        "b": "Correct because RMSprop, SGD, and Adam are the gradient-based optimizers compared.",
+        "c": "Incorrect because Bayesian optimizers are not mentioned for this comparison.",
+        "d": "Incorrect because random search is not the optimization of family compared."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "What does forward propagation produce before loss of computation?",
+      "answers": {
+        "a": "Gradients",
+        "b": "Predictions",
+        "c": "Regularization",
+        "d": "Normalization"
+      },
+      "explanations": {
+        "a": "Incorrect because gradients are computed during backprop, after loss.",
+        "b": "Correct because forward propagation computes predictions from inputs.",
+        "c": "Incorrect because regularization modifies training but does not produce predictions.",
+        "d": "Incorrect because normalization preprocesses inputs but does not produce predictions."
+      },
+      "correctAnswer": "b",
       "difficulty": "beginner"
     }
   ]

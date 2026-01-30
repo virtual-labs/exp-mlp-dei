@@ -2,38 +2,174 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "What is the primary goal of a feedforward neural network (MLP)?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "To store large datasets",
+        "b": "To approximate a function mapping inputs to output",
+        "c": "To create feedback loops",
+        "d": "To sort data efficiently"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Incorrect because storing data is not the network's objective.",
+        "b": "Correct because MLPs are designed to approximate a target function mapping inputs to outputs.",
+        "c": "Incorrect because feedforward networks do not create feedback loops.",
+        "d": "Incorrect because sorting is an algorithmic task, not the MLP's goal."
       },
-      "correctAnswer": "a",
+      "correctAnswer": "b",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "What do you call a layer that is neither input nor output?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Input",
+        "b": "Output",
+        "c": "Hidden",
+        "d": "Bias"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Incorrect because this is the input layer, not an intermediate one.",
+        "b": "Incorrect because this is the final layer producing predictions.",
+        "c": "Correct because hidden layers are intermediate layers between input and output.",
+        "d": "Incorrect because bias is a parameter, not a layer."
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
+    },
+    {
+      "question": "What property lets MLPs model virtually any continuous function?",
+      "answers": {
+        "a": "Linearity",
+        "b": "Depth",
+        "c": "Universality",
+        "d": "Sparsity"
+      },
+      "explanations": {
+        "a": "Incorrect because linearity limits expressiveness, not enables universality.",
+        "b": "Incorrect because depth helps but alone doesn't state the universal property.",
+        "c": "Correct because MLPs have universal function approximation capability.",
+        "d": "Incorrect because sparsity is a regularization trait, not the universal approximation of property."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Which algorithm computes gradients by propagating errors backward?",
+      "answers": {
+        "a": "Forward",
+        "b": "Gradient",
+        "c": "Backpropagation",
+        "d": "Random"
+      },
+      "explanations": {
+        "a": "Incorrect because forward pass computes outputs, not gradients.",
+        "b": "Incorrect because this is a concept, not a specific algorithm.",
+        "c": "Correct because backpropagation computes gradients by propagating error backward through the network.",
+        "d": "Incorrect because random methods do not compute gradients via backprop."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What type of network has no feedback connections and only forward data flow?",
+      "answers": {
+        "a": "Recurrent",
+        "b": "Convolutional",
+        "c": "Feedforward",
+        "d": "Residual"
+      },
+      "explanations": {
+        "a": "Incorrect because recurrent networks include feedback loops.",
+        "b": "Incorrect because convolutional describes layer type, not the presence/absence of feedback.",
+        "c": "Correct because feedforward networks have no cycles and only forward information flow.",
+        "d": "Incorrect because residual refers to skip connections, not the absence of feedback loops."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What class of values strongly affect MLP performance and must be tuned?",
+      "answers": {
+        "a": "Weights",
+        "b": "Hyperparameters",
+        "c": "Outputs",
+        "d": "Labels"
+      },
+      "explanations": {
+        "a": "Incorrect because weights are learned, not hyperparameters tuned externally.",
+        "b": "Correct because hyperparameters like learning rate and architecture strongly affect performance.",
+        "c": "Incorrect because outputs are results, not tunable configuration parameters.",
+        "d": "Incorrect because labels are data, not configuration choices to tune model behavior."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Which rule is fundamental to computing gradients in backpropagation?",
+      "answers": {
+        "a": "Addition",
+        "b": "Multiplication",
+        "c": "Chain",
+        "d": "Division"
+      },
+      "explanations": {
+        "a": "Incorrect because addition alone does not compute chained derivatives.",
+        "b": "Incorrect because multiplication is used but not the core chaining principle.",
+        "c": "Correct because the chain rule is used to propagate derivatives through composed functions.",
+        "d": "Incorrect because division is not the central rule for backpropagating gradients."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "What characteristics of deep networks can make training difficult when gradients shrink?",
+      "answers": {
+        "a": "Exploding",
+        "b": "Stable",
+        "c": "Vanishing",
+        "d": "Sparse"
+      },
+      "explanations": {
+        "a": "Incorrect because exploding gradients refer to growing gradients, not shrinking.",
+        "b": "Incorrect because stability does not describe the problematic shrinking behavior.",
+        "c": "Correct because vanishing gradients shrink during backprop and hinder learning in deep nets.",
+        "d": "Incorrect because sparsity is unrelated to gradient magnitude issues."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "What term describes a network where each node in layer i connects to all nodes in layer i+1?",
+      "answers": {
+        "a": "Sparse",
+        "b": "Local",
+        "c": "Fully connected",
+        "d": "Convolutional"
+      },
+      "explanations": {
+        "a": "Incorrect because sparse implies few connections, not full connectivity.",
+        "b": "Incorrect because local connectivity restricts connections, unlike full connectivity.",
+        "c": "Correct because fully connected means every node connects to all nodes in the next layer.",
+        "d": "Incorrect because convolutional uses local receptive fields, not full connectivity."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What is the role of biases in each layer?",
+      "answers": {
+        "a": "Scale",
+        "b": "Normalize",
+        "c": "Shift",
+        "d": "Dropout"
+      },
+      "explanations": {
+        "a": "Incorrect because scaling is performed by weights, not biases.",
+        "b": "Incorrect because normalization is a separate operation like BatchNorm.",
+        "c": "Correct because biases shift the activation threshold of the linear transform.",
+        "d": "Incorrect because dropout randomly disables units, not a bias function."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
     }
   ]
 }
