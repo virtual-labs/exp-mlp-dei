@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi-Layer Perceptron: Backpropagation Visualizer</title>
     <link rel="stylesheet" href="main.css">
 </head>
+
 <body>
     <div class="simulation-container">
         <!-- Step Indicator Sidebar -->
@@ -94,14 +96,15 @@
                         </div>
                         <button class="run-btn">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
+                                <path d="M8 5v14l11-7z" />
                             </svg>
                             Run
                         </button>
                     </div>
                     <div class="output-panel">
                         <div class="output-box">
-                            <div class="output-text" id="output-1" style="display: none;">✓ Libraries imported successfully</div>
+                            <div class="output-text" id="output-1" style="display: none;">✓ Libraries imported
+                                successfully</div>
                         </div>
                     </div>
                 </div>
@@ -123,7 +126,7 @@ display(data.head())
                         </div>
                         <button class="run-btn">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
+                                <path d="M8 5v14l11-7z" />
                             </svg>
                             Run
                         </button>
@@ -144,11 +147,46 @@ display(data.head())
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr><td>0</td><td>5.1</td><td>3.5</td><td>1.4</td><td>0.2</td><td>Iris-setosa</td></tr>
-                                        <tr><td>1</td><td>4.9</td><td>3.0</td><td>1.4</td><td>0.2</td><td>Iris-setosa</td></tr>
-                                        <tr><td>2</td><td>4.7</td><td>3.2</td><td>1.3</td><td>0.2</td><td>Iris-setosa</td></tr>
-                                        <tr><td>3</td><td>4.6</td><td>3.1</td><td>1.5</td><td>0.2</td><td>Iris-setosa</td></tr>
-                                        <tr><td>4</td><td>5.0</td><td>3.6</td><td>1.4</td><td>0.2</td><td>Iris-setosa</td></tr>
+                                        <tr>
+                                            <td>0</td>
+                                            <td>5.1</td>
+                                            <td>3.5</td>
+                                            <td>1.4</td>
+                                            <td>0.2</td>
+                                            <td>Iris-setosa</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>4.9</td>
+                                            <td>3.0</td>
+                                            <td>1.4</td>
+                                            <td>0.2</td>
+                                            <td>Iris-setosa</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>4.7</td>
+                                            <td>3.2</td>
+                                            <td>1.3</td>
+                                            <td>0.2</td>
+                                            <td>Iris-setosa</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>4.6</td>
+                                            <td>3.1</td>
+                                            <td>1.5</td>
+                                            <td>0.2</td>
+                                            <td>Iris-setosa</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>5.0</td>
+                                            <td>3.6</td>
+                                            <td>1.4</td>
+                                            <td>0.2</td>
+                                            <td>Iris-setosa</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <div class="output-text" style="margin-top: 15px;">
@@ -186,7 +224,7 @@ X_train, X_test, y_train, y_test = train_test_split(
                         </div>
                         <button class="run-btn">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
+                                <path d="M8 5v14l11-7z" />
                             </svg>
                             Run
                         </button>
@@ -226,7 +264,7 @@ model.summary()</code></pre>
                         </div>
                         <button class="run-btn">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
+                                <path d="M8 5v14l11-7z" />
                             </svg>
                             Run
                         </button>
@@ -269,7 +307,7 @@ model.compile(
 
 <span class="builtin">print</span>(<span class="string">"Training Completed!"</span>)</code></pre>
                         </div>
-                        
+
                         <div class="training-controls">
                             <div class="control-group">
                                 <label>Epochs:</label>
@@ -301,10 +339,10 @@ model.compile(
                                 </select>
                             </div>
                         </div>
-                        
+
                         <button class="run-btn" id="trainBtn">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
+                                <path d="M8 5v14l11-7z" />
                             </svg>
                             Run
                         </button>
@@ -328,11 +366,7 @@ model.compile(
                                     </div>
                                 </div>
                                 <div class="output-text" id="trainingStatus">Ready to train...</div>
-                                <div id="step5-bottom-nav" style="display: none; margin-top: 20px; text-align: right; border-top: 1px solid #eee; padding-top: 15px;">
-    <button id="btnNextStep5" class="run-btn completed" style="margin-left: auto; display: inline-flex;">
-        Proceed to Evaluation →
-    </button>
-</div>
+
                             </div>
                         </div>
                     </div>
@@ -365,7 +399,7 @@ plt.show()</code></pre>
                         </div>
                         <button class="run-btn">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
+                                <path d="M8 5v14l11-7z" />
                             </svg>
                             Run
                         </button>
@@ -397,4 +431,5 @@ plt.show()</code></pre>
 
     <script src="script.js"></script>
 </body>
+
 </html>
