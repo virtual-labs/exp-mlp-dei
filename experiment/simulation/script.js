@@ -1192,7 +1192,7 @@ function applyReferenceLayout() {
 }
 
 /**
- * Injects "Run All" and "Reset" buttons into the sidebar
+ * Injects "Download PDF" and "Reset" buttons into the sidebar
  */
 function injectSidebarActions() {
     const sidebar = document.querySelector('.step-sidebar');
@@ -1202,10 +1202,10 @@ function injectSidebarActions() {
     footer.className = 'sidebar-footer';
 
     footer.innerHTML = `
-        <button id="btnRunAll" class="action-btn btn-run-all">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            Run All
-        </button>
+        <a href="../mlp_experiment.pdf" download="mlp_experiment.pdf" id="btnDownloadPdf" class="action-btn btn-download-pdf" style="text-decoration: none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download PDF
+        </a>
         <button id="btnReset" class="action-btn btn-reset">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 2v6h6M21.5 22v-6h-6"/><path d="M22 11.5A10 10 0 0 0 3.2 7.2M2 12.5a10 10 0 0 0 18.8 4.3"/></svg>
             Reset
@@ -1215,56 +1215,11 @@ function injectSidebarActions() {
     sidebar.appendChild(footer);
 
     // Bind Events
-    document.getElementById('btnRunAll').addEventListener('click', runAllSteps);
+    // Note: btnDownloadPdf is wrapped in an anchor tag, so no click listener needed for download.
     document.getElementById('btnReset').addEventListener('click', () => window.location.reload());
 }
 
-/**
- * Logic to execute all steps sequentially
- */
-async function runAllSteps() {
-    const runBtn = document.getElementById('btnRunAll');
-    if (runBtn.disabled) return;
 
-    runBtn.disabled = true;
-    runBtn.innerHTML = 'Running...';
-
-    const totalSteps = 6;
-
-    for (let i = 1; i <= totalSteps; i++) {
-        // Scroll to current step
-        const stepElem = document.getElementById(`step-${i}`);
-        stepElem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-        // If already completed, skip
-        if (appState.completedSteps.includes(i)) continue;
-
-        // Find the run button for this step
-        // Note: We moved it to .notebook-cell-header in applyReferenceLayout
-        const cellBtn = stepElem.querySelector('.run-btn');
-
-        if (cellBtn) {
-            // Trigger click and wait
-            cellBtn.click();
-
-            // Wait for completion (heuristic: wait until button says "Next" or has "completed" class)
-            await new Promise(resolve => {
-                const checkInterval = setInterval(() => {
-                    if (cellBtn.classList.contains('completed') || appState.completedSteps.includes(i)) {
-                        clearInterval(checkInterval);
-                        setTimeout(resolve, 500); // Small delay between steps
-                    }
-                }, 200);
-            });
-        }
-    }
-
-    runBtn.innerHTML = '✓ Done';
-    setTimeout(() => {
-        runBtn.disabled = false;
-        runBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Run All`;
-    }, 2000);
-}
 
 // Initialize on Load
 document.addEventListener('DOMContentLoaded', () => {

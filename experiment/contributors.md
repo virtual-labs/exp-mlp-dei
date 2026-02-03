@@ -2,14 +2,16 @@
 
 | SNo. | Name | Email | Institute | ID |
 | :---: | :---: | :---: | :---: | :---: |
-| 1 | To be updated | - | - | - |
+| 1 | Dr. K. Srinivas | ksrinivas@dei.ac.in | - | - |
+| 2 | Dr. A. Charan Kumari | charankumari@dei.ac.in | - | - |
 
 ### Developers
 
 | SNo. | Name | Email | Institute | ID |
 | :---: | :---: | :---: | :---: | :---: |
-| 1 | To be updated | - | - | - |
+| 1 | Sakshi Chauhan | sakshichauhan84530@gmail.com | - | - |
+| 2 | Harshit Chaudhary | harshit.chaudhary.arty@gmail.com | - | - |
+| 3 | Shabd Sahni | shabdsahni2005@gmail.com | - | - |
+| 4 | Adbhut Satsangi | adbhut.rei.2233@gmail.com | - | - |
 
 ---
-
-> **Note:** This experiment is based on the content "Feedforward Neural Network (MLP)" focusing on structure, training, and visualization of forward/backward propagation and hidden-layer activations.

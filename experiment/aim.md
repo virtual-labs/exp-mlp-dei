@@ -1,3 +1,3 @@
-### Aim of the experiment
+### Aim
 
-To explore the structure and training of Feedforward Neural Network (MLP) and to visualize forward or backprop flow and hidden-layer activations.
+To understand the architecture and training process of a Multilayer Perceptron (MLP) for tabular data by implementing it on the Iris dataset, with detailed visualization of forward propagation, backpropagation, and hidden-layer activations for selected samples.
