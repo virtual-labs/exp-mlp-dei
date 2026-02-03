@@ -8,15 +8,15 @@
 
 ---
 
-#### Additional Resources
+**Additional Resources**
 
-##### Books
+**Books**
 - **Deep Learning** by Ian Goodfellow, Yoshua Bengio, and Aaron Courville
 - **Neural Networks and Deep Learning** by Michael A. Nielsen (Available online)
 
-##### Papers
+**Papers**
 - **Backpropagation through time: what it does and how to do it** - P. J. Werbos (1990)
 
-##### Online Resources
+**Online Resources**
 - [Neural Networks and Deep Learning (Free Online Book)](http://neuralnetworksanddeeplearning.com/)
 - [Deep Learning Book (MIT Press)](https://www.deeplearningbook.org/)
