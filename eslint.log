@@ -1,0 +1,34 @@
+
+/home/runner/work/exp-mlp-dei/exp-mlp-dei/experiment/simulation/notebook/script.js
+  1170:44  warning  'e' is defined but never used  no-unused-vars
+
+/home/runner/work/exp-mlp-dei/exp-mlp-dei/experiment/simulation/simulation/activationPlot.js
+    6:7   warning  'ActivationPlotDrawer' is defined but never used  no-unused-vars
+  225:15  warning  'scaleY' is assigned a value but never used       no-unused-vars
+
+/home/runner/work/exp-mlp-dei/exp-mlp-dei/experiment/simulation/simulation/animationController.js
+    6:7   warning  'AnimationController' is defined but never used  no-unused-vars
+  221:36  warning  'ActivationPlotDrawer' is not defined            no-undef
+
+/home/runner/work/exp-mlp-dei/exp-mlp-dei/experiment/simulation/simulation/app.js
+   24:27  warning  'NetworkRenderer' is not defined      no-undef
+   24:57  warning  'MLPData' is not defined              no-undef
+   27:31  warning  'AnimationController' is not defined  no-undef
+   27:68  warning  'MLPData' is not defined              no-undef
+  194:35  warning  'MLPData' is not defined              no-undef
+  200:42  warning  'MLPData' is not defined              no-undef
+  201:33  warning  'MLPData' is not defined              no-undef
+  202:41  warning  'MLPData' is not defined              no-undef
+  203:40  warning  'MLPData' is not defined              no-undef
+  210:18  warning  'MLPData' is not defined              no-undef
+
+/home/runner/work/exp-mlp-dei/exp-mlp-dei/experiment/simulation/simulation/dataAdapter.js
+  132:38  warning  'module' is not defined  no-undef
+  133:5   warning  'module' is not defined  no-undef
+
+/home/runner/work/exp-mlp-dei/exp-mlp-dei/experiment/simulation/simulation/networkRenderer.js
+    6:7   warning  'NetworkRenderer' is defined but never used       no-unused-vars
+  126:15  warning  'layerLabels' is assigned a value but never used  no-unused-vars
+
+✖ 19 problems (0 errors, 19 warnings)
+
