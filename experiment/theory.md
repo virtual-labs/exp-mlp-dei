@@ -1,6 +1,6 @@
 ### Theory
 
-Deep feedforward networks &mdash; often called feedforward neural networks or multilayer perceptrons (MLPs) &mdash; are fundamental models in deep learning. The goal of a feedforward network is to approximate some target function f*. For example, for a classifier, y = f*(x) maps an input x to a category y.
+Deep feedforward networks &mdash; often called feedforward neural networks or multilayer perceptrons (MLPs) &mdash; are fundamental models in deep learning. The goal of a feedforward network is to approximate some target function f For example, for a classifier, y = f(x) maps an input x to a category y.
 
 A layered feedforward network is one in which any path from an input node to an output node traverses the same number of layers. For example, the n<sup>th</sup> layer of such a network consists of all nodes that are n edge traversals from an input node. A hidden layer is any layer that is neither the input nor the output layer. A network is fully connected if each node in layer i is connected to all nodes in layer i+1. Layered feedforward networks have become popular because they often generalise well: when trained on a relatively sparse set of examples they frequently provide correct outputs on unseen test data.
 
