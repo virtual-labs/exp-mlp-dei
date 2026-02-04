@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLP Forward & Backpropagation Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="simulation-container">
+        <!-- Header -->
+        <header class="sim-header">
+            <div class="header-text">
+                <h1>MLP Forward & Backpropagation Simulator</h1>
+                <p class="sim-subtitle">Interactive visualization of neural network learning on Iris dataset</p>
+            </div>
+            <a href="../index.html" class="back-btn">← Back</a>
+        </header>
+
+        <!-- Main Content -->
+        <main class="sim-main">
+            <!-- Control Panel -->
+            <section class="control-panel">
+                <h2>Simulation Controls</h2>
+                <div class="step-buttons">
+                    <button class="step-btn" id="step1Btn" data-step="1">
+                        <span class="step-num">1</span>
+                        <span class="step-label">Forward Pass</span>
+                    </button>
+                    <button class="step-btn" id="step2Btn" data-step="2">
+                        <span class="step-num">2</span>
+                        <span class="step-label">Backpropagation</span>
+                    </button>
+                    <button class="step-btn" id="step3Btn" data-step="3">
+                        <span class="step-num">3</span>
+                        <span class="step-label">Activation Function</span>
+                    </button>
+                </div>
+
+                <!-- Reset Button -->
+                <button id="resetSimBtn" class="step-btn"
+                    style="margin-top: 16px; justify-content: center; display: none;">
+                    <span class="step-label">Reset Simulation</span>
+                </button>
+
+                <!-- Legend / Index Panel (Replaces Model Config) -->
+                <div class="config-panel">
+                    <h3>Legend / Index</h3>
+                    <div style="font-size: 0.85rem;">
+                        <div style="margin-bottom: 12px;">
+                            <h4
+                                style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px;">
+                                Node Colors</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="display: flex; align-items: center; margin-bottom: 6px;"><span
+                                        style="width: 10px; height: 10px; border-radius: 50%; background: #27ae60; display: inline-block; margin-right: 8px;"></span>
+                                    Positive Activation</li>
+                                <li style="display: flex; align-items: center; margin-bottom: 6px;"><span
+                                        style="width: 10px; height: 10px; border-radius: 50%; background: #e74c3c; display: inline-block; margin-right: 8px;"></span>
+                                    Inactive (ReLU ≤ 0)</li>
+                                <li style="display: flex; align-items: center; margin-bottom: 6px;"><span
+                                        style="width: 10px; height: 10px; border-radius: 50%; background: #fd7e14; display: inline-block; margin-right: 8px;"></span>
+                                    Active / Highlighted</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4
+                                style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px;">
+                                Connection Colors</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="display: flex; align-items: center; margin-bottom: 6px;"><span
+                                        style="width: 20px; height: 3px; background: #0d6efd; display: inline-block; margin-right: 8px;"></span>
+                                    Forward Signal</li>
+                                <li style="display: flex; align-items: center; margin-bottom: 6px;"><span
+                                        style="width: 20px; height: 3px; background: #fd7e14; display: inline-block; margin-right: 8px;"></span>
+                                    Backprop Gradient</li>
+                                <li style="display: flex; align-items: center; margin-bottom: 6px;"><span
+                                        style="width: 20px; height: 3px; background: #27ae60; display: inline-block; margin-right: 8px;"></span>
+                                    Updated Weight</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Visualization Area -->
+            <section class="viz-area">
+                <div class="network-container">
+                    <svg id="networkSVG" width="100%" height="600"></svg>
+                </div>
+            </section>
+
+            <!-- Right Sidebar: Explanation Panel -->
+            <section class="explanation-panel">
+                <h2>Step Explanation</h2>
+                <div class="explanation-content">
+                    <p
+                        style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px; font-style: italic;">
+                        Click on these steps to go through each step and see the process
+                    </p>
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="font-size: 1rem; margin-bottom: 10px; color: var(--text-primary);">Configuration</h3>
+                        <ul style="list-style: none; font-size: 0.9rem; color: var(--text-secondary);">
+                            <li><strong style="color:var(--text-primary)">Dataset:</strong> Iris</li>
+                            <li><strong style="color:var(--text-primary)">Optimizer:</strong> Adam</li>
+                            <li><strong style="color:var(--text-primary)">Learning Rate:</strong> 0.01</li>
+                            <li><strong style="color:var(--text-primary)">Epochs:</strong> 50</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1rem; margin-bottom: 10px; color: var(--text-primary);">Result</h3>
+                        <div
+                            style="background: var(--bg-tertiary); padding: 12px; border-radius: var(--radius-sm); border-left: 3px solid var(--accent-green);">
+                            <p style="margin-bottom: 8px; font-weight: 600; color: var(--accent-green);">✓ Training
+                                Completed!</p>
+                            <p style="margin-bottom: 4px;"><strong>Final Accuracy:</strong> 93.33%</p>
+                            <p style="margin-bottom: 12px;"><strong>Macro F1-Score:</strong> 0.9333</p>
+
+                            <h5
+                                style="font-size: 0.85rem; margin-bottom: 6px; color: var(--text-muted); text-transform: uppercase;">
+                                Class Performance (F1):</h5>
+                            <ul style="list-style: none; font-family: monospace; font-size: 0.85rem;">
+                                <li>Iris-setosa: 1.00</li>
+                                <li>Iris-versicolor: 0.90</li>
+                                <li>Iris-virginica: 0.90</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Explanation Box at the Bottom (Theory-Focused) -->
+        <section class="theory-panel"
+            style="margin: 0 auto; max-width: 1800px; width: 100%; padding: 0 32px 32px 32px;">
+            <div
+                style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 32px; box-shadow: var(--shadow-sm);">
+                <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 24px; color: var(--text-primary);">
+                    Understanding the Multi-Layer Perceptron</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+                    <!-- Content Columns -->
+                    <div>
+                        <h4 style="color: var(--accent-blue); margin-bottom: 8px;">Input Layer</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Input features
+                            (sepal length, width, etc.) are fed into the network. These nodes do not perform
+                            calculation; they simply pass values to the next layer.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent-blue); margin-bottom: 8px;">Hidden Layers</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Neurons calculate
+                            a weighted sum of inputs plus a bias. This linear transformation allows the network to
+                            combine features in complex ways.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent-purple); margin-bottom: 8px;">Activation (ReLU)</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">The Rectified
+                            Linear Unit applies a non-linear threshold: negative values become zero. This sparsity helps
+                            the network learn efficiently.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent-green); margin-bottom: 8px;">Forward Pass</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Data flows from
+                            left to right. Each layer transforms the representation until it reaches the output. No
+                            learning happens here, just prediction.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent-red); margin-bottom: 8px;">Output Layer (Softmax)</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">The final layer
+                            converts raw scores (logits) into probabilities summing to 1. Each node represents a class
+                            confidence.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--text-primary); margin-bottom: 8px;">Prediction</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">The class with
+                            the highest probability is chosen as the model's final prediction. We compare this to the
+                            actual label to compute error.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="dataAdapter.js"></script>
+    <script src="networkRenderer.js"></script>
+    <script src="animationController.js"></script>
+    <script src="activationPlot.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
