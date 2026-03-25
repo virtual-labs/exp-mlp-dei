@@ -23,6 +23,7 @@ This experiment uses an MLP with one input layer, two hidden layers and one outp
 3. **Initialise parameters and model building:**
    * Typical hyperparameters: epochs=100, batch_size=8, learning_rate=0.01, optimiser=RMSprop (compare with SGD and Adam).
    * Build the model with one input layer, two hidden dense layers, and one output layer (softmax). Display the model summary and plot the model architecture.
+   * The model is trained to minimise the **categorical cross-entropy cost function** $J(\theta) = -\frac{1}{m}\sum_{i=1}^{m}\sum_{k=1}^{K} y_k^{(i)} \log \hat{y}_k^{(i)}$, where $m$ is the number of training samples, $K = 3$ classes, $y_k^{(i)}$ is the one-hot true label, and $\hat{y}_k^{(i)}$ is the predicted probability for class $k$.
 
 4. **Model training:**
    * Train for 100 epochs with mini-batches of size 8. Reserve 20% of the training data for validation.

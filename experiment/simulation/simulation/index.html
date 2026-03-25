@@ -166,6 +166,22 @@
                             learning happens here, just prediction.</p>
                     </div>
                     <div>
+                        <h4 style="color: var(--accent-orange, #f59e0b); margin-bottom: 8px;">Backpropagation</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+                            After the forward pass, the loss <em>J(&theta;)</em> (categorical cross-entropy) is computed
+                            by comparing the predicted probabilities with the true one-hot labels. Backpropagation then
+                            applies the <strong>chain rule</strong> to propagate error signals &delta; from the output
+                            layer backwards through each hidden layer. For each layer <em>l</em>, the gradient
+                            &part;J/&part;W<sup>(l)</sup> is computed and used to update weights:
+                            <em>W &larr; W &minus; &eta; &middot; &part;J/&part;W</em>. In this simulation, the
+                            network architecture is <strong>Input(4) &rarr; Hidden1(10) &rarr; Hidden2(8) &rarr;
+                            Output(3)</strong> with weights initialised from actual training; they are <em>not</em> all
+                            equal to 1. The gradient magnitudes shown (Layer 0&rarr;1: 0.0523, Layer 1&rarr;2: 0.0412,
+                            Layer 2&rarr;3: 0.0789) represent the average L2 norm of weight gradients after 50 epochs
+                            of Adam optimisation (lr=0.01), indicating how much each layer's weights change per step.
+                        </p>
+                    </div>
+                    <div>
                         <h4 style="color: var(--accent-red); margin-bottom: 8px;">Output Layer (Softmax)</h4>
                         <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">The final layer
                             converts raw scores (logits) into probabilities summing to 1. Each node represents a class

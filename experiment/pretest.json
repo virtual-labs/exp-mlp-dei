@@ -2,7 +2,7 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "What is the primary goal of a feedforward neural network (MLP)?",
+      "question": "1. What is the primary goal of a feedforward neural network (MLP)?",
       "answers": {
         "a": "To store large datasets",
         "b": "To approximate a function mapping inputs to output",
@@ -19,7 +19,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "What do you call a layer that is neither input nor output?",
+      "question": "2. What do you call a layer that is neither input nor output?",
       "answers": {
         "a": "Input",
         "b": "Output",
@@ -36,7 +36,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "What property lets MLPs model virtually any continuous function?",
+      "question": "3. What property lets MLPs model virtually any continuous function?",
       "answers": {
         "a": "Linearity",
         "b": "Depth",
@@ -53,7 +53,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "Which algorithm computes gradients by propagating errors backward?",
+      "question": "4. Which algorithm computes gradients by propagating errors backward?",
       "answers": {
         "a": "Forward",
         "b": "Gradient",
@@ -70,7 +70,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "What type of network has no feedback connections and only forward data flow?",
+      "question": "5. What type of network has no feedback connections and only forward data flow?",
       "answers": {
         "a": "Recurrent",
         "b": "Convolutional",
@@ -87,7 +87,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "What class of values strongly affect MLP performance and must be tuned?",
+      "question": "6. What class of values strongly affect MLP performance and must be tuned?",
       "answers": {
         "a": "Weights",
         "b": "Hyperparameters",
@@ -104,7 +104,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "Which rule is fundamental to computing gradients in backpropagation?",
+      "question": "7. Which rule is fundamental to computing gradients in backpropagation?",
       "answers": {
         "a": "Addition",
         "b": "Multiplication",
@@ -121,7 +121,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "What characteristics of deep networks can make training difficult when gradients shrink?",
+      "question": "8. What characteristics of deep networks can make training difficult when gradients shrink?",
       "answers": {
         "a": "Exploding",
         "b": "Stable",
@@ -138,7 +138,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "What term describes a network where each node in layer i connects to all nodes in layer i+1?",
+      "question": "9. What term describes a network where each node in layer i connects to all nodes in layer i+1?",
       "answers": {
         "a": "Sparse",
         "b": "Local",
@@ -155,7 +155,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "What is the role of biases in each layer?",
+      "question": "10. What is the role of biases in each layer?",
       "answers": {
         "a": "Scale",
         "b": "Normalize",

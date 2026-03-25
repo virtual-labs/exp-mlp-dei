@@ -2,7 +2,7 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "How many input features does the Iris dataset have in this experiment?",
+      "question": "1. How many input features does the Iris dataset have in this experiment?",
       "answers": {
         "a": "Two",
         "b": "Four",
@@ -19,7 +19,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "Which of the following best describes the Iris dataset class distribution?",
+      "question": "2. Which of the following best describes the Iris dataset class distribution?",
       "answers": {
         "a": "Balanced",
         "b": "Imbalanced",
@@ -36,7 +36,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "What does stratify ensure when splitting a classification dataset?",
+      "question": "3. What does stratify ensure when splitting a classification dataset?",
       "answers": {
         "a": "Shuffle",
         "b": "Balance",
@@ -53,7 +53,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "Which technique checks the correctness of backpropagation gradients numerically?",
+      "question": "4. Which technique checks the correctness of backpropagation gradients numerically?",
       "answers": {
         "a": "Dropout",
         "b": "Gradient-check",
@@ -70,7 +70,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "How many hidden layers does the MLP architecture contain?",
+      "question": "5. How many hidden layers does the MLP architecture contain?",
       "answers": {
         "a": "One",
         "b": "Two",
@@ -87,7 +87,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "Which loss function is appropriate for the compiled MLP on one-hot labels?",
+      "question": "6. Which loss function is appropriate for the compiled MLP on one-hot labels?",
       "answers": {
         "a": "MSE",
         "b": "Hinge",
@@ -104,7 +104,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "What activation is typically used in the output layer for this 3-class problem?",
+      "question": "7. What activation is typically used in the output layer for this 3-class problem?",
       "answers": {
         "a": "ReLU",
         "b": "Sigmoid",
@@ -121,7 +121,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "Which technique reduces overfitting by adding a penalty proportional to square weights?",
+      "question": "8. Which technique reduces overfitting by adding a penalty proportional to square weights?",
       "answers": {
         "a": "Dropout",
         "b": "L2",
@@ -138,7 +138,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "Which optimizers are compared to finding the best accuracy?",
+      "question": "9. Which optimizers are compared to finding the best accuracy?",
       "answers": {
         "a": "Evolutionary",
         "b": "RMSprop/SGD/Adam",
@@ -155,7 +155,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "What does forward propagation produce before loss of computation?",
+      "question": "10. What does forward propagation produce before loss of computation?",
       "answers": {
         "a": "Gradients",
         "b": "Predictions",
