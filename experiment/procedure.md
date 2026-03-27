@@ -16,10 +16,13 @@ The objective of this experiment is to understand the architecture and training 
 3.  **Initializing Parameters & Model Building**
     *   Set hyperparameters: `EPOCHS = 100`, `BATCH_SIZE = 8`, `LEARNING_RATE = 0.01`, `OPTIMIZER = "RMSprop"`.
     *   Build the model with an Input layer of 4 neurons, two hidden Dense layers (10 neurons and 8 neurons, both with ReLU activation), and an output Dense layer of 3 neurons with softmax activation.
-    *   The model is trained to minimise the categorical cross-entropy loss $J(\theta) = -\sum_{i=1}^{C} y_i \log(\hat{y}_i)$, where $C$ is the number of classes, $y_i$ is the true one-hot encoded label, and $\hat{y}_i$ is the predicted probability for class $i$.
-    *   Display the model summary.
 
 4.  **Model Training**
+    *   The model is trained to minimise the categorical cross-entropy loss
+
+$$J(\theta) = -\sum_{i=1}^{C} y_i \log(\hat{y}_i)$$
+
+    where $C$ is the number of classes, $y_i$ is the true one-hot encoded label, and $\hat{y}_i$ is the predicted probability for class $i$. Display the model summary.
     *   Train for 100 epochs using mini-batches of size 8 with a custom `tf.GradientTape` training loop.
     *   At each epoch, perform forward propagation, compute the loss using categorical cross-entropy, and update model parameters via backpropagation.
     *   Record training loss, training accuracy, validation loss, and validation accuracy at each epoch.
