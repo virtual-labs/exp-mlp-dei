@@ -20,80 +20,100 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initializeApp() {
-    // Initialize network renderer
     networkRenderer = new NetworkRenderer('networkSVG', MLPData);
-
-    // Initialize animation controller
     animationController = new AnimationController(networkRenderer, MLPData);
 
-    // Update sample info display
-    updateSampleInfo();
+    // Second renderer for the full-network panel inside #fnWrapper
+    const renderer2 = new NetworkRenderer('networkSVG2', MLPData);
+    bpController = new BackpropController(renderer2, MLPData);
 
-    // Initialize button states
-    const step2 = document.getElementById('step2Btn');
-    const step3 = document.getElementById('step3Btn');
-    if (step2) step2.classList.add('disabled');
-    if (step3) step3.classList.add('disabled');
+    // Lock step 2 and 3 initially
+    ['step2Btn', 'step3Btn'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.classList.add('disabled');
+    });
 
-    console.log('MLP Simulator initialized successfully');
+    console.log('MLP Simulator initialized');
 }
 
 function setupEventListeners() {
-    // Step 1: Forward Pass
+
+    // ── Step 1: Forward Pass ─────────────────────────────────────────────────
     const step1Btn = document.getElementById('step1Btn');
     step1Btn.addEventListener('click', async () => {
         if (animationController.isAnimating) return;
-
         setStepActive(1);
         step1Btn.classList.add('running');
 
+        // Show status panel during animation (forwardPassPanel shown after)
+        showRightPanel('status');
+
         await animationController.animateForwardPass();
+        // animateForwardPass() switches to forwardPassPanel with real results when done
+
+        // Populate the activation right panel calc values now that animation ran
+        const exN = MLPData.activationFunction.exampleNeuron;
+        const calcZ = document.getElementById('actCalcZ');
+        const calcA = document.getElementById('actCalcA');
+        const resA = document.getElementById('actResultA');
+        if (calcZ) calcZ.textContent = exN.z.toFixed(4);
+        if (calcA) calcA.textContent = exN.a.toFixed(4);
+        if (resA) resA.textContent = exN.a.toFixed(4);
 
         step1Btn.classList.remove('running');
-        step1Btn.classList.add('completed');
         step1Btn.classList.add('completed');
         appState.completedSteps.push(1);
 
         // Unlock Step 2
         const step2Btn = document.getElementById('step2Btn');
         if (step2Btn) step2Btn.classList.remove('disabled');
+
+        // Show Reset button
+        const resetSimBtn = document.getElementById('resetSimBtn');
+        if (resetSimBtn) resetSimBtn.style.display = 'flex';
     });
 
-    // Step 2: Backpropagation
+    // ── Step 2: Backpropagation ──────────────────────────────────────────────
     const step2Btn = document.getElementById('step2Btn');
     step2Btn.addEventListener('click', async () => {
-        if (animationController.isAnimating) return;
-
+        if (animationController.isAnimating || step2Btn.classList.contains('disabled')) return;
         setStepActive(2);
         step2Btn.classList.add('running');
+
+        // Show vertical step list, switch right panel
+        const vertSteps = document.getElementById('bpVertSteps');
+        if (vertSteps) vertSteps.style.display = 'block';
+        showRightPanel('backprop');
 
         await animationController.animateBackpropagation();
 
         step2Btn.classList.remove('running');
-        step2Btn.classList.add('completed');
         step2Btn.classList.add('completed');
         appState.completedSteps.push(2);
 
         // Unlock Step 3
         const step3Btn = document.getElementById('step3Btn');
         if (step3Btn) step3Btn.classList.remove('disabled');
+
+        const resetSimBtn = document.getElementById('resetSimBtn');
+        if (resetSimBtn) resetSimBtn.style.display = 'flex';
     });
 
-    // Reset Button
+    // ── Reset ────────────────────────────────────────────────────────────────
     const resetSimBtn = document.getElementById('resetSimBtn');
     if (resetSimBtn) {
-        resetSimBtn.addEventListener('click', () => {
-            resetSimulation();
-        });
+        resetSimBtn.addEventListener('click', () => resetSimulation());
     }
 
-    // Step 3: Activation Function
+    // ── Step 3: Activation Function ──────────────────────────────────────────
     const step3Btn = document.getElementById('step3Btn');
     step3Btn.addEventListener('click', async () => {
         if (animationController.isAnimating || step3Btn.classList.contains('disabled')) return;
-
         setStepActive(3);
         step3Btn.classList.add('running');
+
+        // Switch to activation right panel before animation
+        showRightPanel('activation');
 
         await animationController.animateActivationFunction();
 
@@ -101,30 +121,40 @@ function setupEventListeners() {
         step3Btn.classList.add('completed');
         appState.completedSteps.push(3);
 
-        // Lock all steps after completion
         lockAllSteps();
 
-        // Show Reset Button
-        if (resetSimBtn) resetSimBtn.style.display = 'flex';
-    });
-
-    // Configuration Inputs (Demonstration Only)
-    const configInputs = ['actFuncSelect', 'optimizerSelect', 'epochsInput', 'lrInput'];
-    configInputs.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-            el.addEventListener('change', (e) => {
-                const label = e.target.closest('.config-item').querySelector('label').innerText;
-                const value = e.target.value;
-                animationController.updateStatus(
-                    `<strong>Config Change:</strong> ${label} set to ${value}.<br>` +
-                    `<span style="font-size:0.8em; color:var(--text-muted)">(Note: Using pre-computed values for demonstration)</span>`
-                );
-            });
-        }
+        const resetBtnEl = document.getElementById('resetSimBtn');
+        if (resetBtnEl) resetBtnEl.style.display = 'flex';
     });
 }
 
+// ── Panel Switcher ────────────────────────────────────────────────────────────
+function showRightPanel(mode) {
+    // Hide all right panels
+    ['defaultExplanation', 'forwardPassPanel', 'statusPanel', 'bpRightPanel', 'activationRightPanel'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+    });
+
+    if (mode === 'forward') {
+        const fp = document.getElementById('forwardPassPanel');
+        if (fp) fp.style.display = 'block';
+    } else if (mode === 'status') {
+        const sp = document.getElementById('statusPanel');
+        if (sp) sp.style.display = 'block';
+    } else if (mode === 'backprop') {
+        const bpPanel = document.getElementById('bpRightPanel');
+        if (bpPanel) bpPanel.style.display = 'block';
+    } else if (mode === 'activation') {
+        const actPanel = document.getElementById('activationRightPanel');
+        if (actPanel) actPanel.style.display = 'block';
+    } else {
+        const def = document.getElementById('defaultExplanation');
+        if (def) def.style.display = 'block';
+    }
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
 function lockAllSteps() {
     ['step1Btn', 'step2Btn', 'step3Btn'].forEach(id => {
         const btn = document.getElementById(id);
@@ -133,79 +163,38 @@ function lockAllSteps() {
 }
 
 function resetSimulation() {
-    // Reset App State
     appState.currentStep = null;
     appState.completedSteps = [];
 
-    // Reset Animation Controller
     animationController.reset();
+    if (bpController) bpController.reset();
 
-    // Reset Buttons UI
-    const step1Btn = document.getElementById('step1Btn');
-    const step2Btn = document.getElementById('step2Btn');
-    const step3Btn = document.getElementById('step3Btn');
+    // Hide vertical step list
+    const vertSteps = document.getElementById('bpVertSteps');
+    if (vertSteps) vertSteps.style.display = 'none';
+
+    // Restore default right panel
+    showRightPanel('default');
+
+    // Reset buttons
+    ['step1Btn', 'step2Btn', 'step3Btn'].forEach((id, i) => {
+        const btn = document.getElementById(id);
+        if (!btn) return;
+        btn.classList.remove('active', 'running', 'completed', 'disabled');
+        if (i > 0) btn.classList.add('disabled');
+        const numEl = btn.querySelector('.step-num');
+        if (numEl) numEl.textContent = String(i + 1);
+    });
+
     const resetSimBtn = document.getElementById('resetSimBtn');
-
-    if (step1Btn) {
-        step1Btn.classList.remove('active', 'running', 'completed', 'disabled');
-        step1Btn.querySelector('.step-num').textContent = '1';
-    }
-
-    if (step2Btn) {
-        step2Btn.classList.remove('active', 'running', 'completed');
-        step2Btn.classList.add('disabled');
-        step2Btn.querySelector('.step-num').textContent = '2';
-    }
-
-    if (step3Btn) {
-        step3Btn.classList.remove('active', 'running', 'completed');
-        step3Btn.classList.add('disabled');
-        step3Btn.querySelector('.step-num').textContent = '3';
-    }
-
-    // Hide Reset Button
     if (resetSimBtn) resetSimBtn.style.display = 'none';
 
-    // Reset Visualization (Network)
     networkRenderer.resetNetwork();
 }
 
-
 function setStepActive(stepNum) {
-    // Remove active class from all buttons
-    const allButtons = document.querySelectorAll('.step-btn');
-    allButtons.forEach(btn => {
-        btn.classList.remove('active');
-    });
-
-    // Add active class to current button
+    document.querySelectorAll('.step-btn').forEach(btn => btn.classList.remove('active'));
     const currentBtn = document.getElementById(`step${stepNum}Btn`);
-    if (currentBtn) {
-        currentBtn.classList.add('active');
-    }
-
+    if (currentBtn) currentBtn.classList.add('active');
     appState.currentStep = stepNum;
 }
-
-
-function updateSampleInfo() {
-    const sampleLabel = document.getElementById('sampleLabel');
-    if (sampleLabel) {
-        sampleLabel.textContent = MLPData.sampleData.label;
-    }
-}
-
-// Utility function for debugging
-function logNetworkState() {
-    console.log('Network Architecture:', MLPData.architecture);
-    console.log('Sample Data:', MLPData.sampleData);
-    console.log('Forward Pass Values:', MLPData.forwardPass);
-    console.log('Backprop Gradients:', MLPData.backprop);
-}
-
-// Export for debugging
-window.appState = appState;
-window.networkRenderer = networkRenderer;
-window.animationController = animationController;
-window.MLPData = MLPData;
-window.logNetworkState = logNetworkState;

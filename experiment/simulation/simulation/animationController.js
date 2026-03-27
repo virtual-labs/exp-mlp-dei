@@ -4,294 +4,231 @@
  */
 
 class AnimationController {
-    constructor(renderer, mlpData) {
-        this.renderer = renderer;
-        this.data = mlpData;
-        this.isAnimating = false;
-        this.currentStep = null;
+  constructor(renderer, mlpData) {
+    this.renderer = renderer;
+    this.data = mlpData;
+    this.isAnimating = false;
+    this.currentStep = null;
+  }
+
+  async animateForwardPass() {
+    if (this.isAnimating) return;
+
+    this.isAnimating = true;
+    this.currentStep = 'forward';
+    this.renderer.resetNetwork();
+
+    // Show the persistent forward pass panel immediately (step cards visible throughout)
+    this._showForwardPassPanel();
+    this._setFpCardActive(0);
+    await this.sleep(400);
+
+    // Step 1: Show input layer
+    const inputActivations = this.data.forwardPass.layer0;
+    for (let i = 0; i < inputActivations.length; i++) {
+      this.renderer.highlightNeuron(0, i, '#0d6efd');
+      this.renderer.showNeuronValue(0, i, inputActivations[i]);
+      await this.sleep(200);
+    }
+    await this.sleep(800);
+
+    // Step 2: Propagate to Hidden Layer 1
+    this._setFpCardActive(1);
+    const h1Activations = this.data.forwardPass.layer1_a;
+
+    for (let j = 0; j < h1Activations.length; j++) {
+      for (let i = 0; i < inputActivations.length; i++) {
+        this.renderer.highlightConnection(0, i, 1, j, '#3d8bfd');
+        await this.sleep(30);
+      }
+      const color = h1Activations[j] > 0 ? '#27ae60' : '#adb5bd';
+      this.renderer.highlightNeuron(1, j, color);
+      this.renderer.showNeuronValue(1, j, h1Activations[j]);
+      await this.sleep(150);
+    }
+    await this.sleep(800);
+
+    // Step 3: Propagate to Hidden Layer 2
+    this._setFpCardActive(2);
+    const h2Activations = this.data.forwardPass.layer2_a;
+
+    for (let j = 0; j < h2Activations.length; j++) {
+      for (let i = 0; i < h1Activations.length; i++) {
+        this.renderer.highlightConnection(1, i, 2, j, '#3d8bfd');
+        await this.sleep(25);
+      }
+      const color = h2Activations[j] > 0 ? '#27ae60' : '#adb5bd';
+      this.renderer.highlightNeuron(2, j, color);
+      this.renderer.showNeuronValue(2, j, h2Activations[j]);
+      await this.sleep(150);
+    }
+    await this.sleep(800);
+
+    // Step 4: Propagate to Output Layer
+    this._setFpCardActive(3);
+    const outputActivations = this.data.forwardPass.layer3_a;
+
+    for (let j = 0; j < outputActivations.length; j++) {
+      for (let i = 0; i < h2Activations.length; i++) {
+        this.renderer.highlightConnection(2, i, 3, j, '#3d8bfd');
+        await this.sleep(25);
+      }
+      this.renderer.highlightNeuron(3, j, '#6f42c1');
+      this.renderer.showNeuronValue(3, j, outputActivations[j]);
+      await this.sleep(200);
+    }
+    await this.sleep(600);
+    // Mark all cards done
+    this._setFpCardsDone();
+
+    this.isAnimating = false;
+  }
+
+  async animateBackpropagation() {
+    if (this.isAnimating) return;
+    // Delegate to the guided BackpropController
+    const defaultExpl = document.getElementById('defaultExplanation');
+    const bpPanel = document.getElementById('bpRightPanel');
+    if (defaultExpl) defaultExpl.style.display = 'none';
+    if (bpPanel) bpPanel.style.display = 'block';
+
+    if (typeof bpController !== 'undefined' && bpController) {
+      bpController.init();
+    }
+    // isAnimating stays false — user drives steps manually
+  }
+
+  async animateActivationFunction() {
+    if (this.isAnimating) return;
+
+    this.isAnimating = true;
+    this.currentStep = 'activation';
+
+    // Keep the main network SVG visible — do NOT switch to a separate view
+    // Reset the network to a clean base first
+    this.renderer.resetNetwork();
+
+    // Hide bpView if it was showing (coming from step 2)
+    const bpView = document.getElementById('bpView');
+    if (bpView) bpView.style.display = 'none';
+    const defaultViz = document.getElementById('defaultViz');
+    if (defaultViz) defaultViz.style.display = 'block';
+
+    // Switch right panel to activation panel
+    ['defaultExplanation', 'forwardPassPanel', 'statusPanel', 'bpRightPanel'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+    const actRight = document.getElementById('activationRightPanel');
+    if (actRight) actRight.style.display = 'block';
+
+    // STATIC VISUALIZATION - No animation or delays
+
+    // Show input layer (blue)
+    const layer0 = this.data.updatedForwardPass.layer0;
+    layer0.forEach((v, i) => {
+      this.renderer.highlightNeuron(0, i, '#0d6efd');
+      this.renderer.showNeuronValue(0, i, v);
+    });
+
+    // Hidden Layer 1 — colour by ReLU state, display a (which is z if >0, else 0)
+    const layer1_z = this.data.updatedForwardPass.layer1_z;
+    const layer1_a = this.data.updatedForwardPass.layer1_a;
+    for (let i = 0; i < layer1_a.length; i++) {
+      const z = layer1_z[i];
+      const color = z > 0 ? '#27ae60' : '#adb5bd';
+      this.renderer.highlightNeuron(1, i, color);
+      this.renderer.showNeuronValue(1, i, z > 0 ? z : 0);
     }
 
-    async animateForwardPass() {
-        if (this.isAnimating) return;
-
-        this.isAnimating = true;
-        this.currentStep = 'forward';
-        this.renderer.resetNetwork();
-
-        this.updateStatus('Starting Forward Pass...');
-        await this.sleep(500);
-
-        // Step 1: Show input layer
-        this.updateStatus('Step 1: Input layer receives features [5.1, 3.5, 1.4, 0.2]');
-        const inputActivations = this.data.forwardPass.layer0;
-        for (let i = 0; i < inputActivations.length; i++) {
-            this.renderer.highlightNeuron(0, i, '#0d6efd');
-            this.renderer.showNeuronValue(0, i, inputActivations[i]);
-            await this.sleep(200);
-        }
-        await this.sleep(800);
-
-        // Step 2: Propagate to Hidden Layer 1
-        this.updateStatus('Step 2: Computing Hidden Layer 1 (10 neurons with ReLU)');
-        const h1Activations = this.data.forwardPass.layer1_a;
-
-        for (let j = 0; j < h1Activations.length; j++) {
-            // Animate connections from all input neurons to this hidden neuron
-            for (let i = 0; i < inputActivations.length; i++) {
-                this.renderer.highlightConnection(0, i, 1, j, '#3d8bfd');
-                await this.sleep(30);
-            }
-
-            // Activate the neuron
-            const color = h1Activations[j] > 0 ? '#27ae60' : '#e74c3c';
-            this.renderer.highlightNeuron(1, j, color);
-            this.renderer.showNeuronValue(1, j, h1Activations[j]);
-            await this.sleep(150);
-        }
-        await this.sleep(800);
-
-        // Step 3: Propagate to Hidden Layer 2
-        this.updateStatus('Step 3: Computing Hidden Layer 2 (8 neurons with ReLU)');
-        const h2Activations = this.data.forwardPass.layer2_a;
-
-        for (let j = 0; j < h2Activations.length; j++) {
-            for (let i = 0; i < h1Activations.length; i++) {
-                this.renderer.highlightConnection(1, i, 2, j, '#3d8bfd');
-                await this.sleep(25);
-            }
-
-            const color = h2Activations[j] > 0 ? '#27ae60' : '#e74c3c';
-            this.renderer.highlightNeuron(2, j, color);
-            this.renderer.showNeuronValue(2, j, h2Activations[j]);
-            await this.sleep(150);
-        }
-        await this.sleep(800);
-
-        // Step 4: Propagate to Output Layer
-        this.updateStatus('Step 4: Computing Output Layer (3 neurons with Softmax)');
-        const outputActivations = this.data.forwardPass.layer3_a;
-        const classNames = ['Iris-setosa', 'Iris-versicolor', 'Iris-virginica'];
-
-        for (let j = 0; j < outputActivations.length; j++) {
-            for (let i = 0; i < h2Activations.length; i++) {
-                this.renderer.highlightConnection(2, i, 3, j, '#3d8bfd');
-                await this.sleep(25);
-            }
-
-            this.renderer.highlightNeuron(3, j, '#6f42c1');
-            this.renderer.showNeuronValue(3, j, outputActivations[j]);
-            await this.sleep(200);
-        }
-        await this.sleep(1000);
-
-        // Final result
-        const predictedClass = outputActivations.indexOf(Math.max(...outputActivations));
-        this.updateStatus(
-            `✓ Forward Pass Complete!\\n\\n` +
-            `Predicted: ${classNames[predictedClass]}\\n` +
-            `Confidence: ${(outputActivations[predictedClass] * 100).toFixed(1)}%\\n\\n` +
-            `Output probabilities:\\n` +
-            `  ${classNames[0]}: ${(outputActivations[0] * 100).toFixed(1)}%\\n` +
-            `  ${classNames[1]}: ${(outputActivations[1] * 100).toFixed(1)}%\\n` +
-            `  ${classNames[2]}: ${(outputActivations[2] * 100).toFixed(1)}%`
-        );
-
-        this.isAnimating = false;
+    // Hidden Layer 2 — same treatment
+    const layer2_z = this.data.updatedForwardPass.layer2_z;
+    const layer2_a = this.data.updatedForwardPass.layer2_a;
+    for (let i = 0; i < layer2_a.length; i++) {
+      const z = layer2_z[i];
+      const color = z > 0 ? '#27ae60' : '#adb5bd';
+      this.renderer.highlightNeuron(2, i, color);
+      this.renderer.showNeuronValue(2, i, z > 0 ? z : 0);
     }
 
-    async animateBackpropagation() {
-        if (this.isAnimating) return;
+    // Output layer (purple, show softmax probabilities)
+    const layer3_a = this.data.updatedForwardPass.layer3_a;
+    layer3_a.forEach((v, i) => {
+      this.renderer.highlightNeuron(3, i, '#6f42c1');
+      this.renderer.showNeuronValue(3, i, v);
+    });
 
-        this.isAnimating = true;
-        this.currentStep = 'backprop';
+    this.isAnimating = false;
+  }
 
-        // First run forward pass to set up the network
-        await this.animateForwardPass();
-        await this.sleep(1000);
 
-        this.updateStatus('Starting Backpropagation...');
-        await this.sleep(500);
+  // ── Panel helpers ──────────────────────────────────────────────────────────
 
-        // Step 1: Compute output layer error
-        this.updateStatus('Step 1: Computing output layer error (Loss gradient)');
-        const outputGrad = this.data.backprop.outputGrad;
+  _showStatusPanel() {
+    ['defaultExplanation', 'forwardPassPanel', 'bpRightPanel', 'activationRightPanel'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+    const sp = document.getElementById('statusPanel');
+    if (sp) sp.style.display = 'block';
+  }
 
-        for (let i = 0; i < outputGrad.length; i++) {
-            const color = outputGrad[i] < 0 ? '#27ae60' : '#e74c3c';
-            this.renderer.highlightNeuron(3, i, color);
-            await this.sleep(300);
-        }
-        await this.sleep(800);
+  _showForwardPassPanel() {
+    ['defaultExplanation', 'statusPanel', 'bpRightPanel', 'activationRightPanel'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+    const fp = document.getElementById('forwardPassPanel');
+    if (fp) fp.style.display = 'block';
+  }
 
-        // Step 2: Backpropagate to Hidden Layer 2
-        this.updateStatus('Step 2: Backpropagating gradients to Hidden Layer 2');
-        const h2Grad = this.data.backprop.layer2_grad;
-
-        for (let i = 0; i < h2Grad.length; i++) {
-            // Show gradient flowing backward
-            for (let j = 0; j < outputGrad.length; j++) {
-                this.renderer.highlightConnection(2, i, 3, j, '#f39c12');
-                await this.sleep(30);
-            }
-
-            if (h2Grad[i] > 0.001) {
-                this.renderer.highlightNeuron(2, i, '#ffc107');
-            }
-            await this.sleep(150);
-        }
-        await this.sleep(800);
-
-        // Step 3: Backpropagate to Hidden Layer 1
-        this.updateStatus('Step 3: Backpropagating gradients to Hidden Layer 1');
-        const h1Grad = this.data.backprop.layer1_grad;
-
-        for (let i = 0; i < h1Grad.length; i++) {
-            for (let j = 0; j < h2Grad.length; j++) {
-                this.renderer.highlightConnection(1, i, 2, j, '#f39c12');
-                await this.sleep(25);
-            }
-
-            if (h1Grad[i] > 0.001) {
-                this.renderer.highlightNeuron(1, i, '#ffc107');
-            }
-            await this.sleep(150);
-        }
-        await this.sleep(800);
-
-        // Step 4: Update weights
-        this.updateStatus('Step 4: Updating weights using gradients');
-
-        // Highlight all connections being updated
-        const connections = this.renderer.svg.querySelectorAll('.connection');
-        connections.forEach((conn, idx) => {
-            setTimeout(() => {
-                conn.setAttribute('stroke', '#27ae60');
-                conn.setAttribute('stroke-width', '2');
-            }, idx * 5);
-        });
-
-        await this.sleep(2000);
-
-        this.updateStatus(
-            `✓ Backpropagation Complete!\\n\\n` +
-            `Gradients computed for all layers\\n` +
-            `Weights updated using Adam optimizer\\n` +
-            `Learning rate: 0.01\\n\\n` +
-            `Average gradient magnitudes:\\n` +
-            `  Layer 0→1: ${this.data.backprop.weightGrads.layer0to1.toFixed(4)}\\n` +
-            `  Layer 1→2: ${this.data.backprop.weightGrads.layer1to2.toFixed(4)}\\n` +
-            `  Layer 2→3: ${this.data.backprop.weightGrads.layer2to3.toFixed(4)}`
-        );
-
-        this.isAnimating = false;
+  // ── Forward Pass card helpers ───────────────────────────────────────────────
+  _setFpCardActive(activeIdx) {
+    for (let i = 0; i <= 3; i++) {
+      const card = document.getElementById(`fpCard${i}`);
+      if (!card) continue;
+      card.classList.remove('fp-step-active', 'fp-step-done', 'fp-step-inactive');
+      if (i < activeIdx) {
+        card.classList.add('fp-step-done');
+      } else if (i === activeIdx) {
+        card.classList.add('fp-step-active');
+      } else {
+        card.classList.add('fp-step-inactive');
+      }
     }
+  }
 
-    async animateActivationFunction() {
-        if (this.isAnimating) return;
-
-        this.isAnimating = true;
-        this.currentStep = 'activation';
-        this.renderer.resetNetwork();
-
-        // Show the activation plot
-        const activationContainer = document.getElementById('activationContainer');
-        if (activationContainer) activationContainer.style.display = 'block';
-
-        // Get example neuron data for the plot
-        const exampleData = this.data.activationFunction.exampleNeuron;
-        const zValue = exampleData.z;
-        const aValue = exampleData.a;
-
-        // Brief, general explanation only
-        this.updateStatus(
-            `<strong>Applying ReLU Activation</strong><br>` +
-            `Scanning all neurons...<br>` +
-            `Rule: Output = max(0, Input)`
-        );
-
-        // Update activation info display
-        const zEl = document.getElementById('zValue');
-        const aEl = document.getElementById('aValue');
-        if (zEl) zEl.textContent = zValue.toFixed(4);
-        if (aEl) aEl.textContent = aValue.toFixed(4);
-
-        // Draw the activation plot only if element exists
-        const activationPlotEl = document.getElementById('activationPlot');
-        if (activationPlotEl) {
-            const plotDrawer = new ActivationPlotDrawer('activationPlot', this.data);
-            plotDrawer.drawReLU(zValue, aValue);
-        }
-
-        await this.sleep(1000);
-
-        // Process Hidden Layer 1
-        const layer1_z = this.data.forwardPass.layer1_z;
-        const layer1_a = this.data.forwardPass.layer1_a;
-
-        for (let i = 0; i < layer1_z.length; i++) {
-            const a = layer1_a[i];
-            if (a > 0) {
-                // Highlight activated neurons in green
-                this.renderer.highlightNeuron(1, i, '#27ae60');
-                this.renderer.showNeuronValue(1, i, a);
-            } else {
-                // Highlight deactivated neurons in red
-                this.renderer.highlightNeuron(1, i, '#e74c3c');
-                this.renderer.showNeuronValue(1, i, 0);
-            }
-            await this.sleep(50); // Fast iteration
-        }
-
-        // Process Hidden Layer 2
-        const layer2_z = this.data.forwardPass.layer2_z;
-        const layer2_a = this.data.forwardPass.layer2_a;
-
-        for (let i = 0; i < layer2_z.length; i++) {
-            const a = layer2_a[i];
-            if (a > 0) {
-                this.renderer.highlightNeuron(2, i, '#27ae60');
-                this.renderer.showNeuronValue(2, i, a);
-            } else {
-                this.renderer.highlightNeuron(2, i, '#e74c3c');
-                this.renderer.showNeuronValue(2, i, 0);
-            }
-            await this.sleep(50); // Fast iteration
-        }
-
-        await this.sleep(500);
-
-        this.updateStatus(
-            `<strong>Activation Visualization Complete</strong><br>` +
-            `Non-linearity applied to network.`
-        );
-
-        this.isAnimating = false;
+  _setFpCardsDone() {
+    for (let i = 0; i <= 3; i++) {
+      const card = document.getElementById(`fpCard${i}`);
+      if (!card) continue;
+      card.classList.remove('fp-step-active', 'fp-step-done', 'fp-step-inactive');
+      card.classList.add('fp-step-done');
     }
+  }
 
-    updateStatus(message) {
-        const statusContent = document.getElementById('statusContent');
-        if (statusContent) {
-            statusContent.innerHTML = `<p>${message.replace(/\\n/g, '<br>')}</p>`;
-        }
-        // Log to console for debugging if status panel is removed
-        console.log('Status:', message);
+  updateStatus(message) {
+    const statusContent = document.getElementById('statusContent');
+    if (statusContent) {
+      statusContent.innerHTML = `<p>${message}</p>`;
     }
+  }
 
-    sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
-    reset() {
-        this.isAnimating = false;
-        this.currentStep = null;
-        this.renderer.resetNetwork();
+  reset() {
+    this.isAnimating = false;
+    this.currentStep = null;
+    this.renderer.resetNetwork();
 
-        // Hide activation plot
-        const activationContainer = document.getElementById('activationContainer');
-        if (activationContainer) {
-            activationContainer.style.display = 'none';
-        }
-
-        this.updateStatus('Click a step button to begin visualization');
-    }
+    // Restore default network view
+    const defaultViz = document.getElementById('defaultViz');
+    const bpView = document.getElementById('bpView');
+    const activationView = document.getElementById('activationView');
+    if (defaultViz) defaultViz.style.display = 'block';
+    if (bpView) bpView.style.display = 'none';
+    if (activationView) activationView.style.display = 'none';
+  }
 }

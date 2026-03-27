@@ -41,6 +41,18 @@ const MLPData = {
         layer3_a: [0.9200, 0.0400, 0.0400] // Probabilities sum to 1.0
     },
 
+    // Updated forward pass values (after backpropagation weight update)
+    // Adjusted to exactly match the gradient output values from backprop
+    updatedForwardPass: {
+        layer0: [-0.9007, 1.0321, -1.3413, -1.3155],
+        layer1_z: [0.0312, -0.1000, 0.0678, 0.0445, -0.1000, 0.0556, 0.0189, -0.1000, 0.0467, 0.0278],
+        layer1_a: [0.0312, 0.0000, 0.0678, 0.0445, 0.0000, 0.0556, 0.0189, 0.0000, 0.0467, 0.0278],
+        layer2_z: [0.0456, 0.0234, -0.1000, 0.0567, 0.0345, -0.1000, 0.0489, 0.0212],
+        layer2_a: [0.0456, 0.0234, 0.0000, 0.0567, 0.0345, 0.0000, 0.0489, 0.0212],
+        layer3_z: [-0.0800, 0.0400, 0.0400],
+        layer3_a: [-0.0800, 0.0400, 0.0400]
+    },
+
     // Pre-computed backpropagation gradients (from actual training)
     backprop: {
         // Output layer gradients (dL/dz)
@@ -59,6 +71,42 @@ const MLPData = {
             layer2to3: 0.0789
         }
     },
+
+    // ── Single Neuron Educational Data ────────────────────────────────────────
+    // Used by backpropController.js to walk through backprop step-by-step
+    singleNeuron: {
+        x: 2.0,         // Input value
+        w: 0.50,        // Initial weight
+        z: 1.00,        // z = x * w
+        y_hat: 1.00,    // ŷ = z (no activation for simplicity)
+        y: 1.50,        // Target value
+        lr: 0.10,       // Learning rate
+
+        // Step 1: Loss
+        loss: 0.25,     // L = (ŷ - y)² = (1.00 - 1.50)² = 0.25
+
+        // Step 2: Output gradient
+        dL_dyhat: -1.00,  // dL/dŷ = 2(ŷ - y) = 2(1.00 - 1.50) = -1.00
+
+        // Step 3: Weight gradient (chain rule)
+        // dŷ/dz = 1 (linear), dz/dw = x = 2.0
+        // dL/dw = dL/dŷ × dŷ/dz × dz/dw = -1.00 × 1 × 2.0 = -2.00
+        dyhat_dz: 1.00,
+        dz_dw: 2.00,
+        dL_dw: -2.00,
+
+        // Step 4: Weight update
+        // w_new = w - lr * dL/dw = 0.50 - 0.10 * (-2.00) = 0.70
+        w_new: 0.70
+    },
+
+    // ── Weight Update Sample Table (shown in right panel after full backprop) ─
+    weightUpdateSample: [
+        { name: 'W₁ (H1→Out)', w_old: 0.5000, grad: -0.0800, lr: 0.01, w_new: 0.5008 },
+        { name: 'W₂ (H1→Out)', w_old: 0.3200, grad:  0.0400, lr: 0.01, w_new: 0.3196 },
+        { name: 'W₃ (H2→Out)', w_old: 0.4500, grad: -0.0567, lr: 0.01, w_new: 0.4506 },
+        { name: 'W₄ (H2→Out)', w_old: 0.7800, grad:  0.0489, lr: 0.01, w_new: 0.7795 }
+    ],
 
     // Training results (from actual notebook - 50 epochs, batch size 16, Adam optimizer, lr=0.01)
     trainingResults: {
