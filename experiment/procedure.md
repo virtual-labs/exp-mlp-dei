@@ -1,39 +1,31 @@
 ### Procedure
 
-**Objective:**
-Explore the structure and training of MLPs on tabular data by training an MLP on the Iris dataset (4 features, 3 classes) and visualising forward and backprop flows and hidden-layer activations for selected samples.
+The objective of this experiment is to understand the architecture and training process of a Multilayer Perceptron (MLP) for tabular data by implementing it on the Iris dataset, with detailed visualisation of forward propagation, backpropagation, and hidden-layer activations for selected samples.
 
-The Iris dataset used contains four input features &mdash; Sepal Length, Sepal Width, Petal Length and Petal Width &mdash; and three classes: Iris-setosa, Iris-versicolor and Iris-virginica.
+1.  **Importing Important Libraries**
+    *   Import `numpy` and `pandas` for numerical computation and data handling, `matplotlib` and `seaborn` for data visualisation, and `sklearn` for preprocessing pipelines and evaluation utilities.
+    *   Import `tensorflow` and `tensorflow.keras` for model implementation, and `json`, `os`, and `time` as helper utilities.
 
-This experiment uses an MLP with one input layer, two hidden layers and one output layer, and visualises forward and backward propagation. Different optimisers (RMSprop, SGD and Adam) are compared to determine which yields the best accuracy.
+2.  **Dataset Creation**
+    *   Load the Iris dataset from a CSV file using `pandas`.
+    *   The dataset shape is (150, 5): four feature columns (SepalLengthCm, SepalWidthCm, PetalLengthCm, PetalWidthCm) and one label column (Species).
+    *   Class distribution: Iris-setosa: 50, Iris-versicolor: 50, Iris-virginica: 50 (balanced).
+    *   Scale features using `StandardScaler` and encode labels using `LabelBinarizer` (one-hot encoding).
+    *   Split into train/test sets with 80% training and 20% testing; use `stratify` to preserve class proportions.
 
-**Steps**
+3.  **Initializing Parameters & Model Building**
+    *   Set hyperparameters: `EPOCHS = 100`, `BATCH_SIZE = 8`, `LEARNING_RATE = 0.01`, `OPTIMIZER = "RMSprop"`.
+    *   Build the model with an Input layer of 4 neurons, two hidden Dense layers (10 neurons and 8 neurons, both with ReLU activation), and an output Dense layer of 3 neurons with softmax activation.
+    *   The model is trained to minimise the categorical cross-entropy loss $J(\theta) = -\sum_{i=1}^{C} y_i \log(\hat{y}_i)$, where $C$ is the number of classes, $y_i$ is the true one-hot encoded label, and $\hat{y}_i$ is the predicted probability for class $i$.
+    *   Display the model summary.
 
-1. **Import libraries:**
-   Import `numpy` and `pandas` for numerical computation and data handling, `matplotlib` for data visualization, `sklearn` for pipelines, and model calls and evaluations. Use a deep learning framework (e.g., TensorFlow/Keras or PyTorch) for model implementation.
+4.  **Model Training**
+    *   Train for 100 epochs using mini-batches of size 8 with a custom `tf.GradientTape` training loop.
+    *   At each epoch, perform forward propagation, compute the loss using categorical cross-entropy, and update model parameters via backpropagation.
+    *   Record training loss, training accuracy, validation loss, and validation accuracy at each epoch.
+    *   Every 10 epochs, save model weight checkpoints and record the L2 norms of kernel gradients for Hidden\_Layer\_1, Hidden\_Layer\_2, and Output\_Layer for a selected inspection sample.
 
-2. **Dataset loading and description:**
-   * Load the Iris dataset (e.g., from Kaggle or sklearn.datasets).
-   * The dataset shape is (150, 5): four feature columns and one label column.
-   * Class distribution: Iris-setosa: 50, Iris-versicolor: 50, Iris-virginica: 50 (balanced).
-   * This dataset has no missing values or duplicate rows; minimal cleaning is required.
-   * Scale features (e.g., StandardScaler) and encode labels (one-hot encoding).
-   * Split into train/test sets with 80% training and 20% testing; use stratify to preserve class proportions.
-
-3. **Initialise parameters and model building:**
-   * Typical hyperparameters: epochs=100, batch_size=8, learning_rate=0.01, optimiser=RMSprop (compare with SGD and Adam).
-   * Build the model with one input layer, two hidden dense layers, and one output layer (softmax). Display the model summary and plot the model architecture.
-   * The model is trained to minimise the **categorical cross-entropy cost function** $J(\theta) = -\frac{1}{m}\sum_{i=1}^{m}\sum_{k=1}^{K} y_k^{(i)} \log \hat{y}_k^{(i)}$, where $m$ is the number of training samples, $K = 3$ classes, $y_k^{(i)}$ is the one-hot true label, and $\hat{y}_k^{(i)}$ is the predicted probability for class $k$.
-
-4. **Model training:**
-   * Train for 100 epochs with mini-batches of size 8. Reserve 20% of the training data for validation.
-   * Plot training and validation curves for loss and accuracy versus epochs.
-   * Optionally, visualise forward and backward flows for selected samples and record gradient norms for analysis.
-
-5. **Model evaluation:**
-   * Evaluate the model on the test set using accuracy, precision, recall, and F1 score. Visualise results using a confusion matrix.
-   * Show a classification report (precision, recall, F1-score, support) and compute macro and weighted averages.
-   * Analyse misclassifications and class-wise performance.
-
-6. **Gradient checkpoints (backprop flow):**
-   * Record L2 norms of gradients per layer (both hidden layers and output layer) for selected samples and save checkpoints for analysis.
+5.  **Model Evaluation**
+    *   Load saved checkpoint weights and evaluate the model at each checkpoint epoch (10, 20, …, 100).
+    *   For each checkpoint, report the test accuracy, display the confusion matrix, and print the classification report (precision, recall, F1-score, support) with macro and weighted averages.
+    *   Plot training and validation loss and accuracy curves up to each checkpoint epoch, and display a bar chart of gradient kernel L2 norms per layer for the chosen inspection sample.
