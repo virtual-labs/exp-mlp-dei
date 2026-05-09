@@ -23,9 +23,9 @@ To make the idea of a feedforward network more concrete, we begin with an exampl
 
 An MLP consists of multiple layers arranged sequentially:
 
-* **Input layer:** accepts raw input features.
-* **Hidden layers:** perform intermediate transformations.
-* **Output layer:** produces the final prediction.
+- **Input layer:** accepts raw input features.
+- **Hidden layers:** perform intermediate transformations.
+- **Output layer:** produces the final prediction.
 
 Each neuron in a layer is connected to every neuron in the next layer, forming a fully connected network. A network is called a layered feedforward network if every path from input to output passes through the same number of layers. Hidden layers are responsible for learning useful intermediate representations from the data.
 
@@ -33,8 +33,8 @@ Up to now, neural networks have been described as models in which the output of 
 
 ![Feed-Forward Neural Network Architecture](images/image5.png)
 <br>
-*Figure 1 – Feed-Forward Neural Network Architecture*
-*(Source: Based on the standard multilayer perceptron model as presented in Goodfellow, Bengio & Courville, Deep Learning, MIT Press, 2016)*
+_Figure 1 – Feed-Forward Neural Network Architecture_
+_(Source: Based on the standard multilayer perceptron model as presented in Goodfellow, Bengio & Courville, Deep Learning, MIT Press, 2016)_
 
 **Mathematical Representation of MLP**
 
@@ -50,11 +50,11 @@ $$h^{(l)} = \rho(z^{(l)})$$
 
 where:
 
-* $W^{(l)}$ is the weight matrix of layer $l$,
-* $b^{(l)}$ is the bias vector,
-* $\rho(\cdot)$ is the activation function such as ReLU, sigmoid, or tanh,
-* $h^{(l)}$ is the output of layer $l$,
-* $h^{(0)} = x$, the input vector.
+- $W^{(l)}$ is the weight matrix of layer $l$,
+- $b^{(l)}$ is the bias vector,
+- $\rho(\cdot)$ is the activation function such as ReLU, sigmoid, or tanh,
+- $h^{(l)}$ is the output of layer $l$,
+- $h^{(0)} = x$, the input vector.
 
 The overall network is a composition of such transformations:
 
@@ -90,10 +90,10 @@ $$J(\theta) = -\sum_{i=1}^{C} y_i \log(\hat{y}_i)$$
 
 where:
 
-* $y_i$ is the true one-hot encoded label,
-* $\hat{y}_i$ is the predicted probability for class $i$,
-* $C$ is the number of classes,
-* $\theta$ represents all model parameters.
+- $y_i$ is the true one-hot encoded label,
+- $\hat{y}_i$ is the predicted probability for class $i$,
+- $C$ is the number of classes,
+- $\theta$ represents all model parameters.
 
 This loss function quantifies how far the predicted probability distribution is from the true class distribution.
 
@@ -123,9 +123,9 @@ where $\eta$ is the learning rate. This update rule moves the parameters in the 
 
 Common optimisers include:
 
-* Stochastic Gradient Descent (SGD)
-* RMSprop
-* Adam
+- Stochastic Gradient Descent (SGD)
+- RMSprop
+- Adam
 
 These optimisation methods differ in how they scale or adapt the updates, but they all aim to minimise the same cost function $J(\theta)$.
 
@@ -184,8 +184,8 @@ This cycle is repeated for multiple epochs until the model converges or reaches 
 
 ![MLP Process both Forward and Backpropagation](images/image6.png)
 <br>
-*Figure 2- MLP Process both Forward and Backpropagation*
-*(Source: Antonio Gulli, Sujit Pal, Deep Learning with Keras)*
+_Figure 2- MLP Process both Forward and Backpropagation_
+_(Source: Antonio Gulli, Sujit Pal, Deep Learning with Keras)_
 
 In a neural network, individual neuron outputs matter less than the collective behaviour of the weights in each layer. The network adjusts its internal weights so that prediction accuracy increases over successive epochs. Using appropriate features and high-quality labels is fundamental for reducing bias and improving learning.
 
@@ -207,13 +207,13 @@ Another challenge is hyperparameter sensitivity. The performance of an MLP depen
 
 **Merits of Feedforward Neural Network (MLP):**
 
-* **Scalability:** The number of hidden layers and neurons can be adjusted to match problem complexity.
-* **Performance on tabular data:** For many structured datasets, MLPs can outperform more complex models due to their simplicity and ability to learn direct features.
-* **Universal function approximation:** MLPs can approximate virtually any continuous function, enabling them to model complex, non-linear relationships.
+- **Scalability:** The number of hidden layers and neurons can be adjusted to match problem complexity.
+- **Performance on tabular data:** For many structured datasets, MLPs can outperform more complex models due to their simplicity and ability to learn direct features.
+- **Universal function approximation:** MLPs can approximate virtually any continuous function, enabling them to model complex, non-linear relationships.
 
 **Demerits of Feedforward Neural Network (MLP):**
 
-* **Sensitivity to hyperparameters:** Performance depends heavily on choices such as number of layers, units, learning rate, and activation functions.
-* **Overfitting:** MLPs can memorise training data and generalise poorly, especially with small datasets.
-* **Gradient issues:** Very deep networks may encounter vanishing or exploding gradients, making training difficult.
-* **Data requirements:** Large amounts of labelled data are often necessary to train effectively.
+- **Sensitivity to hyperparameters:** Performance depends heavily on choices such as number of layers, units, learning rate, and activation functions.
+- **Overfitting:** MLPs can memorise training data and generalise poorly, especially with small datasets.
+- **Gradient issues:** Very deep networks may encounter vanishing or exploding gradients, making training difficult.
+- **Data requirements:** Large amounts of labelled data are often necessary to train effectively.

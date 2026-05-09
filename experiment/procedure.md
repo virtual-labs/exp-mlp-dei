@@ -29,16 +29,18 @@ This experiment uses an MLP with one input layer, two hidden layers and one outp
    * Display the model summary and plot the model architecture to verify the structure before training.
 
 4. **Model training:**
-   * The model is trained by minimising a cost function, which measures the difference between the predicted output and the true labels. Since the Iris dataset is a multi-class classification problem, the categorical cross-entropy loss is used:
+   * The model is trained by minimising a cost function $J(\theta)$, which measures the difference between the predicted output $\hat{y}$ and the true labels $y$. Since the Iris dataset is a multi-class classification problem, the categorical cross-entropy loss is used:
 
 $$J(\theta) = -\sum_{i=1}^{C} y_i \log(\hat{y}_i)$$
 
-   * where:
+   where:
    * $y_i$ is the true label (one-hot encoded),
    * $\hat{y}_i$ is the predicted probability for class $i$,
    * $C$ is the number of classes (here, $C = 3$),
    * $\theta$ represents all model parameters (weights and biases).
-   * The gradients $\frac{\partial J(\theta)}{\partial \theta}$ are computed using backpropagation, and the optimisation algorithms (RMSprop, SGD, and Adam) update the parameters to minimise this cost function.
+
+   The gradients $\frac{\partial J(\theta)}{\partial \theta}$ are computed using backpropagation, and the optimisation algorithms (RMSprop, SGD, and Adam) update the parameters to minimise this cost function.
+
    * Train for 100 epochs with mini-batches of size 8.
    * Plot training and validation curves for loss and accuracy versus epochs.
    * Optionally, visualise forward and backward flows for selected samples and record gradient norms for analysis.
