@@ -38,16 +38,16 @@
     {
       "question": "3. What does stratify ensure when splitting a classification dataset?",
       "answers": {
-        "a": "Shuffle",
-        "b": "Balance",
-        "c": "Scale",
-        "d": "Encode"
+        "a": "Shuffles the data before splitting",
+        "b": "Preserves class proportions across splits",
+        "c": "Scales the feature values before splitting",
+        "d": "Applies one-hot encoding to labels"
       },
       "explanations": {
-        "a": "Incorrect because shuffles randomize order, not preserve class proportions.",
-        "b": "Correct because stratify preserves class distribution proportions across splits.",
-        "c": "Incorrect because scaling changes feature magnitudes, not class ratios.",
-        "d": "Incorrect because encoding changes label representation, not split composition."
+        "a": "Incorrect because shuffling randomises order but does not control class distribution across splits.",
+        "b": "Correct because stratify ensures that the proportion of each class in the original dataset is maintained in both the training and testing splits.",
+        "c": "Incorrect because scaling changes feature magnitudes; it is a preprocessing step unrelated to how splits are formed.",
+        "d": "Incorrect because encoding changes label representation, not the composition of the split."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
@@ -121,52 +121,52 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "8. Which technique reduces overfitting by adding a penalty proportional to square weights?",
+      "question": "8. Which technique reduces overfitting by adding a penalty proportional to the squared weights?",
       "answers": {
         "a": "Dropout",
-        "b": "L2",
-        "c": "L1",
-        "d": "BatchNorm"
+        "b": "L2 Regularisation",
+        "c": "L1 Regularisation",
+        "d": "Batch Normalisation"
       },
       "explanations": {
-        "a": "Incorrect because dropout randomly disables units, not adding weight penalties.",
-        "b": "Correct because L2 regularization (weight decay) penalizes the squared magnitude of weights.",
-        "c": "Incorrect because L1 penalizes absolute weights and encourages sparsity, not squared penalty.",
-        "d": "Incorrect because batch normalization normalizes activations, not directly penalize weights."
+        "a": "Incorrect because dropout randomly disables units during training rather than adding a weight magnitude penalty.",
+        "b": "Correct because L2 regularisation, also called weight decay, adds a penalty term proportional to the squared magnitude of the weights to the loss function, discouraging large weights.",
+        "c": "Incorrect because L1 regularisation penalises the absolute value of weights and encourages sparsity, not a squared penalty.",
+        "d": "Incorrect because batch normalisation normalises activations within a mini-batch; it does not directly penalise weight magnitudes."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
     },
     {
-      "question": "9. Which optimizers are compared to finding the best accuracy?",
+      "question": "9. Which optimisers are compared for finding the best accuracy in this experiment?",
       "answers": {
-        "a": "Evolutionary",
-        "b": "RMSprop/SGD/Adam",
-        "c": "Bayesian",
-        "d": "Random"
+        "a": "Evolutionary algorithms",
+        "b": "RMSprop, SGD, and Adam",
+        "c": "Bayesian optimisers",
+        "d": "Random search"
       },
       "explanations": {
-        "a": "Incorrect because evolutionary optimizers are not part of the comparison.",
-        "b": "Correct because RMSprop, SGD, and Adam are the gradient-based optimizers compared.",
-        "c": "Incorrect because Bayesian optimizers are not mentioned for this comparison.",
-        "d": "Incorrect because random search is not the optimization of family compared."
+        "a": "Incorrect because evolutionary optimisers are not part of the comparison in this experiment.",
+        "b": "Correct because RMSprop, SGD, and Adam are the three gradient-based optimisers compared in this experiment to determine which yields the best classification accuracy on the Iris dataset.",
+        "c": "Incorrect because Bayesian optimisers are not mentioned for this comparison.",
+        "d": "Incorrect because random search is a hyperparameter optimisation method, not a gradientbased optimiser used during model training."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
     },
     {
-      "question": "10. What does forward propagation produce before loss of computation?",
+      "question": "10. What does forward propagation produce before the computation of loss?",
       "answers": {
         "a": "Gradients",
         "b": "Predictions",
-        "c": "Regularization",
-        "d": "Normalization"
+        "c": "Regularisation penalties",
+        "d": "Normalised inputs"
       },
       "explanations": {
-        "a": "Incorrect because gradients are computed during backprop, after loss.",
-        "b": "Correct because forward propagation computes predictions from inputs.",
-        "c": "Incorrect because regularization modifies training but does not produce predictions.",
-        "d": "Incorrect because normalization preprocesses inputs but does not produce predictions."
+        "a": "Incorrect because gradients are computed during backpropagation, which occurs after the loss has been calculated.",
+        "b": "Correct because forward propagation computes predictions ŷ from the input features, and these predictions are then used by the loss function to measure the error.",
+        "c": "Incorrect because regularisation modifies the loss function during training but does not produce predictions in the forward pass.",
+        "d": "Incorrect because normalisation is a preprocessing step applied before training begins, not a product of forward propagation."
       },
       "correctAnswer": "b",
       "difficulty": "beginner"

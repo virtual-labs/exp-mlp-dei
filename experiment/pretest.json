@@ -36,18 +36,18 @@
       "difficulty": "beginner"
     },
     {
-      "question": "3. What property lets MLPs model virtually any continuous function?",
+      "question": "3. What theorem guarantees that MLPs can approximate virtually any continuous function?",
       "answers": {
-        "a": "Linearity",
-        "b": "Depth",
-        "c": "Universality",
-        "d": "Sparsity"
+        "a": "Bayes' Theorem",
+        "b": "No-Free-Lunch Theorem",
+        "c": "Universal Approximation Theorem",
+        "d": "Central Limit Theorem"
       },
       "explanations": {
-        "a": "Incorrect because linearity limits expressiveness, not enables universality.",
-        "b": "Incorrect because depth helps but alone doesn't state the universal property.",
-        "c": "Correct because MLPs have universal function approximation capability.",
-        "d": "Incorrect because sparsity is a regularization trait, not the universal approximation of property."
+        "a": "Incorrect because Bayes' Theorem concerns conditional probability, not neural network approximation capability.",
+        "b": "Incorrect because the No-Free-Lunch Theorem addresses generalisation across all problems, not approximation power.",
+        "c": "Correct because the Universal Approximation Theorem formally guarantees that an MLP with at least one hidden layer and a non-linear activation can approximate any continuous function to arbitrary precision.",
+        "d": "Incorrect because the Central Limit Theorem is a statistical result about the distribution of sample means."
       },
       "correctAnswer": "c",
       "difficulty": "intermediate"
@@ -72,22 +72,22 @@
     {
       "question": "5. What type of network has no feedback connections and only forward data flow?",
       "answers": {
-        "a": "Recurrent",
-        "b": "Convolutional",
-        "c": "Feedforward",
-        "d": "Residual"
+        "a": "Recurrent Neural Network (RNN)",
+        "b": "LSTM (Long Short-Term Memory)",
+        "c": "Feedforward Neural Network",
+        "d": "Residual Network"
       },
       "explanations": {
-        "a": "Incorrect because recurrent networks include feedback loops.",
-        "b": "Incorrect because convolutional describes layer type, not the presence/absence of feedback.",
-        "c": "Correct because feedforward networks have no cycles and only forward information flow.",
-        "d": "Incorrect because residual refers to skip connections, not the absence of feedback loops."
+        "a": "Incorrect because recurrent networks include feedback loops that cycle information back through time.",
+        "b": "Incorrect because LSTMs are a type of recurrent network with gated cells that maintain feedback through time steps.",
+        "c": "Correct because feedforward networks have no cycles and only forward information flow from input to output.",
+        "d": "Incorrect because residual refers to skip connections, not the absence of feedback loops, and residual networks are typically feedforward architectures used for different purposes."
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
     },
     {
-      "question": "6. What class of values strongly affect MLP performance and must be tuned?",
+      "question": "6. What class of values strongly affect MLP performance and are set before training and adjusted manually or by search?",
       "answers": {
         "a": "Weights",
         "b": "Hyperparameters",
@@ -95,10 +95,10 @@
         "d": "Labels"
       },
       "explanations": {
-        "a": "Incorrect because weights are learned, not hyperparameters tuned externally.",
-        "b": "Correct because hyperparameters like learning rate and architecture strongly affect performance.",
-        "c": "Incorrect because outputs are results, not tunable configuration parameters.",
-        "d": "Incorrect because labels are data, not configuration choices to tune model behavior."
+        "a": "Incorrect because weights are learned automatically during training through backpropagation and gradient descent, not set manually before training.",
+        "b": "Correct because hyperparameters such as learning rate, number of layers, batch size, and number of epochs are set before training and tuned manually or via search strategies.",
+        "c": "Incorrect because outputs are the results produced by the network, not configuration choices.",
+        "d": "Incorrect because labels are the target values in the training data, not configuration parameters."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
@@ -121,18 +121,18 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "8. What characteristics of deep networks can make training difficult when gradients shrink?",
+      "question": "8. What characteristic of deep networks can make training difficult when gradients shrink?",
       "answers": {
-        "a": "Exploding",
-        "b": "Stable",
-        "c": "Vanishing",
-        "d": "Sparse"
+        "a": "Exploding gradients",
+        "b": "Stable gradients",
+        "c": "Vanishing gradients",
+        "d": "Sparse gradients"
       },
       "explanations": {
-        "a": "Incorrect because exploding gradients refer to growing gradients, not shrinking.",
-        "b": "Incorrect because stability does not describe the problematic shrinking behavior.",
-        "c": "Correct because vanishing gradients shrink during backprop and hinder learning in deep nets.",
-        "d": "Incorrect because sparsity is unrelated to gradient magnitude issues."
+        "a": "Incorrect because exploding gradients refer to gradients that grow excessively large, which is the opposite problem.",
+        "b": "Incorrect because stability does not describe the problematic shrinking behaviour.",
+        "c": "Correct because vanishing gradients shrink during backpropagation through many layers and hinder learning in early layers of deep networks.",
+        "d": "Incorrect because sparsity is unrelated to the magnitude of gradient values during propagation."
       },
       "correctAnswer": "c",
       "difficulty": "intermediate"

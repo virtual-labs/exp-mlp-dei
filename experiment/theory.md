@@ -2,7 +2,7 @@
 
 **Introduction to Feedforward Neural Networks**
 
-A Multilayer Perceptron (MLP) is a class of deep learning model within feedforward neural networks, designed to learn a mapping between input data and corresponding output targets, expressed as
+A Multilayer Perceptron (MLP) is a class of feedforward neural network, designed to learn a mapping between input data and corresponding output targets, expressed as
 
 $$\hat{y} = f(x; \theta),$$
 
@@ -11,6 +11,13 @@ where $x$ represents the input features, $\hat{y}$ denotes the predicted output,
 $$y = f^*(x),$$
 
 in classification problems. A layered feedforward network ensures that all paths from input to output pass through the same number of layers, and it is considered fully connected when each neuron in one layer is linked to every neuron in the next. The key strength of MLPs lies in their ability to model complex, non-linear relationships and to generalise effectively to unseen data when trained on representative datasets.
+
+These models are called feedforward because information flows through the function being evaluated from $x$, through the intermediate computations used to define $f$, and finally to the output $\hat{y}$. There are no feedback connections in which the outputs of the model are fed back into itself.
+
+I. **Gradient-Based Learning:** For feedforward neural networks, it is important to initialise all weights to small random values; biases may be initialised to zero or to small positive values. Iterative gradient-based optimisation algorithms, such as SGD, RMSprop, and Adam, are used to train feedforward networks and deep models.
+
+II. **Learning XOR:** To illustrate the capabilities of feedforward networks, consider the XOR function. XOR returns 1 when exactly one of $x_1$ or $x_2$ is 1, and 0 otherwise. Learning XOR demonstrates that an MLP with a hidden layer can represent non-linearly separable functions.
+To make the idea of a feedforward network more concrete, we begin with an example of a fully functioning feedforward network on a very simple task: learning the XOR function. The XOR function ("exclusive or") is an operation on two binary values, $x_1$ and $x_2$. When exactly one of these binary values is equal to 1, the XOR function returns 1. Otherwise, it returns 0. The XOR function provides the target function $y = f^*(x)$ that we want to learn. Our model provides a function $y = f(x; \theta)$, and our learning algorithm adapts the parameters $\theta$ to make $f$ as similar as possible to $f^*$.
 
 **Architecture of MLP**
 
@@ -136,25 +143,25 @@ where $\eta$ is the learning rate and $\nabla_\theta J(\theta_t)$ represents the
 
 **RMSprop**
 
-RMSprop is an adaptive learning rate method that improves upon SGD by scaling the parameter updates based on the magnitude of recent gradients. It maintains an exponentially weighted moving average of the squared gradients, defined as
+RMSprop is an adaptive learning rate method introduced by Geoffrey Hinton that improves upon SGD by scaling the parameter updates based on the magnitude of recent gradients. It maintains an exponentially weighted moving average of the squared gradients, defined as
 
-$$v_t = \beta v_{t-1} + (1 - \beta)(\nabla_\theta J(\theta_t))^2,$$
+$$E[g^2]_t = \rho E[g^2]_{t-1} + (1 - \rho)(\nabla_\theta J(\theta_t))^2$$
 
-where $\beta$ is the decay rate. The parameter update rule is then given by
+where $\rho$ is the decay rate (typically set to 0.9). The parameter update rule is then given by:
 
-$$\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{v_t} + \epsilon} \nabla_\theta J(\theta_t),$$
+$$\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{E[g^2]_t} + \epsilon} \nabla_\theta J(\theta_t)$$
 
-where $\epsilon$ is a small constant added to ensure numerical stability. By normalising the gradient, RMSprop helps stabilise the learning process and is particularly effective when dealing with non-stationary objectives.
+where $\epsilon$ is a small constant (e.g., $10^{-8}$) added to ensure numerical stability. By normalising the gradient by the root mean square of recent gradients, RMSprop helps stabilise the learning process and is particularly effective when dealing with non-stationary objectives or recurrent networks.
 
 **Adam (Adaptive Moment Estimation)**
 
-Adam is an advanced optimisation algorithm that combines the benefits of momentum and adaptive learning rates. It computes both the first moment and the second moment of the gradients. The moment estimates are given by
+Adam is an advanced optimisation algorithm that combines the benefits of momentum and adaptive learning rates. It computes both the first moment (mean) and the second moment (uncentred variance) of the gradients. The moment estimates are given by
 
 $$m_t = \beta_1 m_{t-1} + (1 - \beta_1) \nabla_\theta J(\theta_t),$$
 
 $$v_t = \beta_2 v_{t-1} + (1 - \beta_2)(\nabla_\theta J(\theta_t))^2,$$
 
-where $\beta_1$ and $\beta_2$ are decay rates. These estimates are bias-corrected as follows:
+where $\beta_1$ and $\beta_2$ are decay rates (typically $\beta_1 = 0.9$ and $\beta_2 = 0.999$). Since $m_t$ and $v_t$ are initialised to zero, they are biased toward zero, especially in the early steps. These estimates are therefore bias-corrected as follows:
 
 $$\hat{m}_t = \frac{m_t}{1 - \beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1 - \beta_2^t}.$$
 
@@ -162,7 +169,7 @@ The parameter update rule is then given by
 
 $$\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon} \hat{m}_t.$$
 
-Adam is widely used due to its efficiency, robustness, and ability to converge quickly in practice.
+Adam is widely used due to its efficiency, robustness, and ability to converge quickly in practice. The bias-correction step is essential for stable convergence in the initial training iterations.
 
 **Training Workflow**
 
@@ -173,23 +180,14 @@ The entire training process consists of repeating the following steps:
 3. Backpropagation to compute gradients.
 4. Parameter update using an optimisation algorithm.
 
-This cycle is repeated for multiple epochs until the model converges or reaches a predefined stopping condition.
-
-These models are called feedforward because information flows through the function being evaluated from $x$, through the intermediate computations used to define $f$, and finally to the output $\hat{y}$. There are no feedback connections in which the outputs of the model are fed back into itself.
-
-I. **Gradient-Based Learning:** For feedforward neural networks, it is important to initialise all weights to small random values; biases may be initialised to zero or to small positive values. Iterative gradient-based optimisation algorithms, such as SGD, RMSprop, and Adam, are used to train feedforward networks and deep models.
-
-II. **Learning XOR:** To illustrate the capabilities of feedforward networks, consider the XOR function. XOR returns 1 when exactly one of $x_1$ or $x_2$ is 1, and 0 otherwise. Learning XOR demonstrates that an MLP with a hidden layer can represent non-linearly separable functions.
-To make the idea of a feedforward network more concrete, we begin with an example of a fully functioning feedforward network on a very simple task: learning the XOR function. The XOR function ("exclusive or") is an operation on two binary values, $x_1$ and $x_2$. When exactly one of these binary values is equal to 1, the XOR function returns 1. Otherwise, it returns 0. The XOR function provides the target function $y = f^*(x)$ that we want to learn. Our model provides a function $y = f(x; \theta)$, and our learning algorithm adapts the parameters $\theta$ to make $f$ as similar as possible to $f^*$.
-
-The process of forward propagation from input to output and backward propagation of errors is repeated several times until the error gets below a predefined threshold. The whole process is represented in the following diagram:
+This cycle is repeated for multiple epochs until the model converges or reaches a predefined stopping condition, with the goal of progressively minimising the loss function $J(\theta)$. The overall MLP forward and backward propagation process is illustrated in Figure 2.
 
 ![MLP Process both Forward and Backpropagation](images/image6.png)
 <br>
 *Figure 2- MLP Process both Forward and Backpropagation*
 *(Source: Antonio Gulli, Sujit Pal, Deep Learning with Keras)*
 
-The forward and backward propagation process is repeated until the error falls below a predefined threshold. The model is updated to progressively minimise the loss function. In a neural network, individual neuron outputs matter less than the collective behaviour of the weights in each layer, as shown in Figure 2; the network adjusts its internal weights so that prediction accuracy increases. Using appropriate features and high-quality labels is fundamental for reducing bias and improving learning.
+In a neural network, individual neuron outputs matter less than the collective behaviour of the weights in each layer. The network adjusts its internal weights so that prediction accuracy increases over successive epochs. Using appropriate features and high-quality labels is fundamental for reducing bias and improving learning.
 
 **Generalisation, Overfitting, and Underfitting**
 
