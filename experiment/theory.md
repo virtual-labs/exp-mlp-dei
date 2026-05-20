@@ -6,15 +6,15 @@ A Multilayer Perceptron (MLP) is a class of feedforward neural network, designed
 
 $$\hat{y} = f(x; \theta),$$
 
-where $x$ represents the input features, $\hat{y}$ denotes the predicted output, and $\theta$ comprises the model parameters, including weights and biases. In classification tasks, the model assigns inputs to discrete classes, while in regression it predicts continuous values. A feedforward network is characterised by the unidirectional flow of information from the input layer through one or more hidden layers to the output layer, without any feedback connections, making it suitable for standard prediction tasks. The objective of such networks is to approximate an underlying target function $f^*$. For instance, in a classification task, the network learns a mapping
+where $x$ represents the input features, $\hat{y}$ denotes the predicted output, and $\theta$ comprises the model parameters, including weights and biases. In classification tasks, the model assigns inputs to discrete classes, while in regression, it predicts continuous values. A feedforward network is characterized by the unidirectional flow of information from the input layer through one or more hidden layers to the output layer, with no feedback connections, making it well-suited for standard prediction tasks. The objective of such networks is to approximate an underlying target function $f^*$. For instance, in a classification task, the network learns a mapping
 
 $$y = f^*(x),$$
 
-in classification problems. A layered feedforward network ensures that all paths from input to output pass through the same number of layers, and it is considered fully connected when each neuron in one layer is linked to every neuron in the next. The key strength of MLPs lies in their ability to model complex, non-linear relationships and to generalise effectively to unseen data when trained on representative datasets.
+in classification problems. A layered feedforward network ensures that all paths from input to output pass through the same number of layers, and it is considered fully connected when each neuron in one layer is linked to every neuron in the next. The key strength of MLPs lies in their ability to model complex, non-linear relationships and to generalize effectively to unseen data when trained on representative datasets.
 
-These models are called feedforward because information flows through the function being evaluated from $x$, through the intermediate computations used to define $f$, and finally to the output $\hat{y}$. There are no feedback connections in which the outputs of the model are fed back into itself.
+These models are called feedforward because information flows through the function being evaluated from $x$, through the intermediate computations used to define $f$, and finally to the output $\hat{y}$. There are no feedback connections in which the model's outputs are fed back into it.
 
-I. **Gradient-Based Learning:** For feedforward neural networks, it is important to initialise all weights to small random values; biases may be initialised to zero or to small positive values. Iterative gradient-based optimisation algorithms, such as SGD, RMSprop, and Adam, are used to train feedforward networks and deep models.
+I. **Gradient-Based Learning:** For feedforward neural networks, it is important to initialize all weights to small random values; biases may be initialized to zero or to small positive values. Iterative gradient-based optimization algorithms, such as SGD, RMSprop, and Adam, are used to train feedforward networks and deep models.
 
 II. **Learning XOR:** To illustrate the capabilities of feedforward networks, consider the XOR function. XOR returns 1 when exactly one of $x_1$ or $x_2$ is 1, and 0 otherwise. Learning XOR demonstrates that an MLP with a hidden layer can represent non-linearly separable functions.
 To make the idea of a feedforward network more concrete, we begin with an example of a fully functioning feedforward network on a very simple task: learning the XOR function. The XOR function ("exclusive or") is an operation on two binary values, $x_1$ and $x_2$. When exactly one of these binary values is equal to 1, the XOR function returns 1. Otherwise, it returns 0. The XOR function provides the target function $y = f^*(x)$ that we want to learn. Our model provides a function $y = f(x; \theta)$, and our learning algorithm adapts the parameters $\theta$ to make $f$ as similar as possible to $f^*$.
@@ -27,7 +27,7 @@ An MLP consists of multiple layers arranged sequentially:
 - **Hidden layers:** perform intermediate transformations.
 - **Output layer:** produces the final prediction.
 
-Each neuron in a layer is connected to every neuron in the next layer, forming a fully connected network. A network is called a layered feedforward network if every path from input to output passes through the same number of layers. Hidden layers are responsible for learning useful intermediate representations from the data.
+Each neuron in a layer is connected to every neuron in the next layer, forming a fully connected network. Hidden layers are responsible for learning useful intermediate representations from the data.
 
 Up to now, neural networks have been described as models in which the output of one layer is used as the input to the next layer; such architectures are called feedforward neural networks. In a pure feedforward network, information is always fed forward, never fed back, so there are no recurrent feedback loops. This can also be shown in Figure 1.
 
@@ -99,7 +99,7 @@ This loss function quantifies how far the predicted probability distribution is 
 
 **Backpropagation (Learning Mechanism)**
 
-Backpropagation is the core algorithm used to train an MLP. It computes how the loss changes with respect to each parameter in the network. More precisely, the objective is to compute gradients of the cost function $J(\theta)$ with respect to the weights and biases. This is done using the chain rule of differentiation.
+Backpropagation is the core algorithm used to train an MLP. It computes how the loss changes with respect to each parameter in the network. More precisely, the objective is to compute the gradients of the cost function $J(\theta)$ with respect to the weights and biases. This is done using the chain rule of differentiation.
 
 The gradients computed during backpropagation include:
 
@@ -175,19 +175,19 @@ Adam is widely used due to its efficiency, robustness, and ability to converge q
 
 The entire training process consists of repeating the following steps:
 
-1. Forward propagation to compute predictions.
-2. Loss computation to measure prediction error.
-3. Backpropagation to compute gradients.
-4. Parameter update using an optimisation algorithm.
+- Forward propagation to compute predictions.
+- Loss computation to measure prediction error.
+- Backpropagation to compute gradients.
+- Parameter update using an optimisation algorithm.
 
 This cycle is repeated for multiple epochs until the model converges or reaches a predefined stopping condition, with the goal of progressively minimising the loss function $J(\theta)$. The overall MLP forward and backward propagation process is illustrated in Figure 2.
 
 ![MLP Process both Forward and Backpropagation](images/image6.png)
 <br>
-_Figure 2- MLP Process both Forward and Backpropagation_
+_Figure 2- MLP Process, both Forward and Backpropagation_
 _(Source: Antonio Gulli, Sujit Pal, Deep Learning with Keras)_
 
-In a neural network, individual neuron outputs matter less than the collective behaviour of the weights in each layer. The network adjusts its internal weights so that prediction accuracy increases over successive epochs. Using appropriate features and high-quality labels is fundamental for reducing bias and improving learning.
+In a neural network, individual neuron outputs matter less than the collective behavior of the weights in each layer. The network adjusts its internal weights so that prediction accuracy increases over successive epochs. Using appropriate features and high-quality labels is fundamental for reducing bias and improving learning.
 
 **Generalisation, Overfitting, and Underfitting**
 
@@ -199,9 +199,9 @@ The ultimate goal of training is not only to perform well on the training set bu
 
 **Challenges in Training Deep Networks**
 
-Training deep neural networks presents several challenges. One of the most important is the vanishing gradient problem. During backpropagation, gradients are propagated backward through multiple layers using the chain rule. When activation functions such as sigmoid or tanh are used, their derivatives may become very small, causing gradients to shrink as they move backward. As a result, earlier layers receive very small updates and learning becomes slow.
+Training deep neural networks presents several challenges. One of the most important is the vanishing gradient problem. During backpropagation, gradients are propagated backward through multiple layers using the chain rule. When activation functions such as sigmoid or tanh are used, their derivatives may become very small, causing gradients to shrink as they move backward. As a result, earlier layers receive very small updates, and learning becomes slow.
 
-The exploding gradient problem is the opposite case, where gradients become excessively large during backpropagation. This can lead to unstable updates and divergence during training. Techniques such as careful initialisation, suitable learning rates, and gradient clipping are commonly used to reduce this problem.
+The exploding gradient problem is the opposite case, where gradients become excessively large during backpropagation. This can lead to unstable updates and divergence during training. Techniques such as careful initialization, suitable learning rates, and gradient clipping are commonly used to reduce this problem.
 
 Another challenge is hyperparameter sensitivity. The performance of an MLP depends strongly on the learning rate, number of layers, number of neurons, activation functions, batch size, and number of epochs. Poor hyperparameter choices can lead to unstable training, overfitting, or underfitting.
 
@@ -213,7 +213,7 @@ Another challenge is hyperparameter sensitivity. The performance of an MLP depen
 
 **Demerits of Feedforward Neural Network (MLP):**
 
-- **Sensitivity to hyperparameters:** Performance depends heavily on choices such as number of layers, units, learning rate, and activation functions.
-- **Overfitting:** MLPs can memorise training data and generalise poorly, especially with small datasets.
+- **Sensitivity to hyperparameters:** Performance depends heavily on choices such as the number of layers, units, learning rate, and activation functions.
+- **Overfitting:** MLPs can memorize training data and generalize poorly, especially with small datasets.
 - **Gradient issues:** Very deep networks may encounter vanishing or exploding gradients, making training difficult.
-- **Data requirements:** Large amounts of labelled data are often necessary to train effectively.
+- **Data requirements:** Large amounts of labeled data are often necessary to train effectively.

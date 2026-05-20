@@ -44,7 +44,7 @@
         "d": "Applies one-hot encoding to labels"
       },
       "explanations": {
-        "a": "Incorrect because shuffling randomises order but does not control class distribution across splits.",
+        "a": "Incorrect because shuffling randomizes order but does not control class distribution across splits.",
         "b": "Correct because stratify ensures that the proportion of each class in the original dataset is maintained in both the training and testing splits.",
         "c": "Incorrect because scaling changes feature magnitudes; it is a preprocessing step unrelated to how splits are formed.",
         "d": "Incorrect because encoding changes label representation, not the composition of the split."
@@ -131,8 +131,8 @@
       "explanations": {
         "a": "Incorrect because dropout randomly disables units during training rather than adding a weight magnitude penalty.",
         "b": "Correct because L2 regularisation, also called weight decay, adds a penalty term proportional to the squared magnitude of the weights to the loss function, discouraging large weights.",
-        "c": "Incorrect because L1 regularisation penalises the absolute value of weights and encourages sparsity, not a squared penalty.",
-        "d": "Incorrect because batch normalisation normalises activations within a mini-batch; it does not directly penalise weight magnitudes."
+        "c": "Incorrect because L1 regularisation penalizes the absolute value of weights and encourages sparsity, not a squared penalty.",
+        "d": "Incorrect because batch normalization normalizes activations within a mini-batch; it does not directly penalize weight magnitudes."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
@@ -146,10 +146,10 @@
         "d": "Random search"
       },
       "explanations": {
-        "a": "Incorrect because evolutionary optimisers are not part of the comparison in this experiment.",
+        "a": "Incorrect because evolutionary optimizers are not part of the comparison in this experiment.",
         "b": "Correct because RMSprop, SGD, and Adam are the three gradient-based optimisers compared in this experiment to determine which yields the best classification accuracy on the Iris dataset.",
         "c": "Incorrect because Bayesian optimisers are not mentioned for this comparison.",
-        "d": "Incorrect because random search is a hyperparameter optimisation method, not a gradientbased optimiser used during model training."
+        "d": "Incorrect because random search is a hyperparameter optimisation method, not a gradient-based optimiser used during model training."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
