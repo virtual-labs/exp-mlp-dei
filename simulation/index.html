@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLP Educational Lab</title>
+    <style>
+        :root {
+            --text-primary: #111;
+            --text-secondary: #666;
+            --bg-body: #fff;
+            --border-color: #e5e7eb;
+            --accent-blue: #000;
+            /* Minimalist black style from image */
+            --radius-md: 8px;
+            --spacing-md: 24px;
+            --spacing-lg: 32px;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background: var(--bg-body);
+            color: var(--text-primary);
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            /* approx 32px */
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            transition: all 0.2s ease;
+            background: #fff;
+        }
+
+        .card:hover {
+            border-color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 40px;
+            padding-bottom: 40px;
+            color: #999;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>MLP Educational Lab</h1>
+            <p class="subtitle">Interactive learning environment for Multi-Layer Perceptrons</p>
+        </header>
+
+        <div class="card-grid">
+            <!-- Notebook View -->
+            <a href="./notebook/index.html" class="card">
+                <span class="card-tag">TUTORIAL</span>
+                <h2>Notebook View</h2>
+                <p>Step-by-step MLP experiment with explanations, training flow, and outputs</p>
+            </a>
+
+            <!-- Simulation -->
+            <a href="./simulation/index.html" class="card">
+                <span class="card-tag">SIMULATION</span>
+                <h2>Interactive Playground</h2>
+                <p>Visual exploration of MLP layers, activations, and decision boundaries</p>
+            </a>
+        </div>
+
+        <footer>
+            Virtual Labs — Deep Learning Experiments
+        </footer>
+    </div>
+
+<script src="../assets/js/iframeResize.js"></script>
+        
+        </body>
+
+</html>

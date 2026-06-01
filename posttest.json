@@ -1,0 +1,175 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "1. How many input features does the Iris dataset have in this experiment?",
+      "answers": {
+        "a": "Two",
+        "b": "Four",
+        "c": "Three",
+        "d": "Five"
+      },
+      "explanations": {
+        "a": "Incorrect because Iris has more than two features.",
+        "b": "Correct because Sepal Length, Sepal Width, Petal Length, and Petal Width are used.",
+        "c": "Incorrect because there are four numeric features, not three.",
+        "d": "Incorrect because five would include the label column, but inputs are four."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "2. Which of the following best describes the Iris dataset class distribution?",
+      "answers": {
+        "a": "Balanced",
+        "b": "Imbalanced",
+        "c": "Skewed",
+        "d": "Sparse"
+      },
+      "explanations": {
+        "a": "Correct because each of the three classes has exactly 50 instances, giving equal class counts.",
+        "b": "Incorrect because imbalanced implies unequal class counts, which is not the case here.",
+        "c": "Incorrect because skewed suggests a heavy bias toward one or more classes, which does not apply.",
+        "d": "Incorrect because sparse refers to feature/data sparsity, not equal class counts."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "3. What does stratify ensure when splitting a classification dataset?",
+      "answers": {
+        "a": "Shuffles the data before splitting",
+        "b": "Preserves class proportions across splits",
+        "c": "Scales the feature values before splitting",
+        "d": "Applies one-hot encoding to labels"
+      },
+      "explanations": {
+        "a": "Incorrect because shuffling randomizes order but does not control class distribution across splits.",
+        "b": "Correct because stratify ensures that the proportion of each class in the original dataset is maintained in both the training and testing splits.",
+        "c": "Incorrect because scaling changes feature magnitudes; it is a preprocessing step unrelated to how splits are formed.",
+        "d": "Incorrect because encoding changes label representation, not the composition of the split."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "4. Which technique checks the correctness of backpropagation gradients numerically?",
+      "answers": {
+        "a": "Dropout",
+        "b": "Gradient-check",
+        "c": "BatchNorm",
+        "d": "EarlyStop"
+      },
+      "explanations": {
+        "a": "Incorrect because dropout is a regularization method, not a gradient check.",
+        "b": "Correct because gradient checking numerically verifies analytic gradients from backprop.",
+        "c": "Incorrect because batch normalization stabilizes activations, not verifying gradients.",
+        "d": "Incorrect because early stopping halts training, not used for gradient verification."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "5. How many hidden layers does the MLP architecture contain?",
+      "answers": {
+        "a": "One",
+        "b": "Two",
+        "c": "Three",
+        "d": "Zero"
+      },
+      "explanations": {
+        "a": "Incorrect because the model uses two hidden layers.",
+        "b": "Correct because the architecture specifies two dense hidden layers.",
+        "c": "Incorrect because only two hidden layers are used.",
+        "d": "Incorrect because the network includes hidden layers."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "6. Which loss function is appropriate for the compiled MLP on one-hot labels?",
+      "answers": {
+        "a": "MSE",
+        "b": "Hinge",
+        "c": "Categorical_crossentropy",
+        "d": "MAE"
+      },
+      "explanations": {
+        "a": "Incorrect because mean squared error is not ideal for multiclass classification with probabilities.",
+        "b": "Incorrect because hinge loss is for margin classifiers, not softmax outputs.",
+        "c": "Correct because categorical crossentropy matches softmax outputs with one-hot labels.",
+        "d": "Incorrect because mean absolute error is not standard for multiclass classification."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "7. What activation is typically used in the output layer for this 3-class problem?",
+      "answers": {
+        "a": "ReLU",
+        "b": "Sigmoid",
+        "c": "Softmax",
+        "d": "Tanh"
+      },
+      "explanations": {
+        "a": "Incorrect because ReLU is for hidden layers, not multiclass outputs.",
+        "b": "Incorrect because sigmoid is for binary outputs, not softmax multiclass.",
+        "c": "Correct because softmax produces class probabilities for multiclass classification.",
+        "d": "Incorrect because tanh is not suitable for producing class probability distributions."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "8. Which technique reduces overfitting by adding a penalty proportional to the squared weights?",
+      "answers": {
+        "a": "Dropout",
+        "b": "L2 Regularisation",
+        "c": "L1 Regularisation",
+        "d": "Batch Normalisation"
+      },
+      "explanations": {
+        "a": "Incorrect because dropout randomly disables units during training rather than adding a weight magnitude penalty.",
+        "b": "Correct because L2 regularisation, also called weight decay, adds a penalty term proportional to the squared magnitude of the weights to the loss function, discouraging large weights.",
+        "c": "Incorrect because L1 regularisation penalizes the absolute value of weights and encourages sparsity, not a squared penalty.",
+        "d": "Incorrect because batch normalization normalizes activations within a mini-batch; it does not directly penalize weight magnitudes."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "9. Which optimisers are compared for finding the best accuracy in this experiment?",
+      "answers": {
+        "a": "Evolutionary algorithms",
+        "b": "RMSprop, SGD, and Adam",
+        "c": "Bayesian optimisers",
+        "d": "Random search"
+      },
+      "explanations": {
+        "a": "Incorrect because evolutionary optimizers are not part of the comparison in this experiment.",
+        "b": "Correct because RMSprop, SGD, and Adam are the three gradient-based optimisers compared in this experiment to determine which yields the best classification accuracy on the Iris dataset.",
+        "c": "Incorrect because Bayesian optimisers are not mentioned for this comparison.",
+        "d": "Incorrect because random search is a hyperparameter optimisation method, not a gradient-based optimiser used during model training."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "10. What does forward propagation produce before the computation of loss?",
+      "answers": {
+        "a": "Gradients",
+        "b": "Predictions",
+        "c": "Regularisation penalties",
+        "d": "Normalised inputs"
+      },
+      "explanations": {
+        "a": "Incorrect because gradients are computed during backpropagation, which occurs after the loss has been calculated.",
+        "b": "Correct because forward propagation computes predictions ŷ from the input features, and these predictions are then used by the loss function to measure the error.",
+        "c": "Incorrect because regularisation modifies the loss function during training but does not produce predictions in the forward pass.",
+        "d": "Incorrect because normalisation is a preprocessing step applied before training begins, not a product of forward propagation."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    }
+  ]
+}
