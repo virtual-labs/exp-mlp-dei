@@ -1,0 +1,2720 @@
+/* CSS Variables - Matching Reference UI */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --text-primary: #212529;
+    --text-secondary: #495057;
+    --text-muted: #6c757d;
+    --accent-blue: #0d6efd;
+    --accent-blue-light: #3d8bfd;
+    --accent-blue-dark: #0a58ca;
+    --accent-green: #198754;
+    --accent-yellow: #ffc107;
+    --accent-red: #dc3545;
+    --accent-purple: #6f42c1;
+    --border-color: #dee2e6;
+    --border-light: #e9ecef;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Main Container */
+.simulation-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+/* Header */
+.sim-header {
+    background: #ffffff;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.sim-header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.sim-subtitle {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* Back Button */
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    background: #ffffff;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+
+.back-btn:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--text-muted);
+}
+
+/* Main Content */
+.sim-main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 300px 1fr 300px;
+    grid-template-rows: 1fr;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    max-width: 1800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ... existing control panel styles ... */
+
+/* Explanation Panel (Right Sidebar) */
+.explanation-panel {
+    grid-column: 3;
+    grid-row: 1;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: calc(100vh - 100px);
+    /* Prevent scrolling of whole page if content is long */
+}
+
+.explanation-panel h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.explanation-content {
+    flex: 1;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-light);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.placeholder-text p {
+    margin-bottom: var(--spacing-md);
+}
+
+.instruction-list p {
+    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--accent-blue);
+}
+
+/* Control Panel */
+.control-panel {
+    grid-column: 1;
+    grid-row: 1;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.control-panel h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+/* Step Buttons */
+.step-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.step-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--bg-primary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+    font-size: 1rem;
+}
+
+.step-btn:hover {
+    border-color: var(--accent-blue);
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+}
+
+.step-btn.active {
+    border-color: var(--accent-blue);
+    background: rgba(13, 110, 253, 0.05);
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+}
+
+.step-btn.running {
+    border-color: var(--accent-yellow);
+    background: rgba(255, 193, 7, 0.1);
+    animation: pulse 1.5s infinite;
+}
+
+.step-btn.completed {
+    border-color: var(--accent-green);
+    background: rgba(25, 135, 84, 0.05);
+}
+
+.step-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-color);
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: all var(--transition-normal);
+}
+
+.step-btn.active .step-num {
+    border-color: var(--accent-blue);
+    background: var(--accent-blue);
+    color: #ffffff;
+}
+
+.step-btn.running .step-num {
+    border-color: var(--accent-yellow);
+    background: var(--accent-yellow);
+    color: var(--text-primary);
+}
+
+.step-btn.completed .step-num {
+    border-color: var(--accent-green);
+    background: var(--accent-green);
+    color: #ffffff;
+}
+
+.step-btn.completed .step-num::after {
+    content: '✓';
+    font-size: 1rem;
+}
+
+.step-btn.completed .step-num {
+    font-size: 0;
+}
+
+.step-label {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.step-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: var(--bg-secondary);
+}
+
+.step-btn.active .step-label {
+    color: var(--accent-blue);
+    font-weight: 600;
+}
+
+
+
+/* Visualization Area */
+.viz-area {
+    grid-column: 2;
+    grid-row: 1;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    position: relative;
+    /* Added for absolute positioning of children */
+}
+
+.network-container {
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+}
+
+#networkSVG {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Activation Container */
+/* Activation Container - Floating Overlay */
+.activation-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(4px);
+    border-top: 1px solid var(--border-color);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    padding: var(--spacing-md);
+    z-index: 20;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+    max-height: 280px;
+    /* Limit height to prevent covering too much */
+    overflow-y: auto;
+}
+
+.activation-container h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    text-align: center;
+}
+
+#activationPlot {
+    display: block;
+    margin: 0 auto;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    height: 150px;
+    /* Constrain height */
+    width: auto;
+}
+
+.activation-info {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-light);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+    margin-top: var(--spacing-md);
+}
+
+.activation-info p {
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.95rem;
+}
+
+.activation-info strong {
+    color: var(--text-primary);
+}
+
+.activation-info span {
+    color: var(--accent-blue);
+    font-weight: 600;
+    font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+/* Activation Content Layout */
+.activation-content {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: var(--spacing-lg);
+    align-items: start;
+}
+
+.activation-plot-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Activation Explanation Panel */
+.activation-explanation {
+    background: linear-gradient(135deg, rgba(13, 110, 253, 0.05) 0%, rgba(111, 66, 193, 0.05) 100%);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+}
+
+.activation-explanation h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    padding-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* Concise Activation Steps */
+/* Math Card & Logic Flow */
+.math-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.math-formula {
+    font-family: 'Fira Code', monospace;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--accent-blue);
+    margin-bottom: var(--spacing-xs);
+}
+
+.math-desc {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.logic-flow {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.flow-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-primary);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-light);
+    font-size: 0.85rem;
+}
+
+.flow-label {
+    font-family: 'Fira Code', monospace;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.flow-arrow {
+    color: var(--text-muted);
+}
+
+.flow-result.active {
+    color: var(--accent-green);
+    font-weight: 600;
+}
+
+.flow-result.inactive {
+    color: var(--accent-red);
+    font-weight: 600;
+}
+
+/* Config Info Row */
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(13, 110, 253, 0.05);
+    /* Slight tint to distinguish */
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-light);
+    margin-bottom: 4px;
+}
+
+.info-row.full-width {
+    grid-column: 1 / -1;
+}
+
+.info-row .label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.info-row .value {
+    font-size: 0.85rem;
+    font-family: 'Fira Code', monospace;
+    font-weight: 600;
+    color: var(--accent-blue);
+}
+
+/* Config Panel */
+.config-panel {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-top: var(--spacing-lg);
+    /* Add fixed spacing instead */
+}
+
+.config-panel h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+.config-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+.config-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.config-item label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.config-item select,
+.config-item input {
+    padding: 6px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    width: 100%;
+}
+
+.config-item select:disabled,
+.config-item input:disabled {
+    background: var(--bg-tertiary);
+    color: var(--text-muted);
+}
+
+.green-text {
+    color: var(--accent-green);
+    font-weight: 600;
+}
+
+.red-text {
+    color: var(--accent-red);
+    font-weight: 600;
+}
+
+
+
+
+/* SVG Animations */
+.neuron {
+    transition: all var(--transition-normal);
+}
+
+.neuron.active {
+    filter: drop-shadow(0 0 8px rgba(13, 110, 253, 0.6));
+}
+
+.connection {
+    transition: all var(--transition-normal);
+}
+
+.connection.active {
+    stroke-width: 3;
+    filter: drop-shadow(0 0 4px rgba(13, 110, 253, 0.4));
+}
+
+.gradient-flow {
+    stroke-width: 3;
+    filter: drop-shadow(0 0 4px rgba(243, 156, 18, 0.6));
+}
+
+/* Animations */
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes flowForward {
+    from {
+        stroke-dashoffset: 1000;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes flowBackward {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: 1000;
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Navigation & Responsive Adjustments */
+@media (max-width: 1600px) {
+    .sim-main {
+        grid-template-columns: 280px 1fr 280px;
+    }
+}
+
+@media (max-width: 1400px) {
+    .sim-main {
+        grid-template-columns: 300px 1fr;
+        grid-template-rows: 1fr auto;
+    }
+
+    .explanation-panel {
+        grid-column: 1 / 3;
+        grid-row: 2;
+        max-height: 400px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .sim-main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+
+    .control-panel {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .viz-area {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .explanation-panel {
+        grid-column: 1;
+        grid-row: 3;
+        max-height: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .sim-header h1 {
+        font-size: 1.25rem;
+    }
+
+    .arch-display {
+        font-size: 0.75rem;
+    }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   NEW RIGHT-PANEL ARCHITECTURE
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Split the explanation panel into static top + scrollable dynamic bottom */
+.explanation-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+.ep-static-top {
+    padding: var(--spacing-md) var(--spacing-md) 0;
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.ep-static-top h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.ep-dynamic {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-md);
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* ── Phase pills ─────────────────────────────────────────────────────────── */
+.phase-pills {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.phase-pill {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 8px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border-color);
+    background: var(--bg-tertiary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: all 0.25s ease;
+}
+
+.pill-num {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.68rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+}
+
+.phase-pill.pill-active {
+    border-color: var(--accent-blue);
+    background: rgba(13, 110, 253, 0.07);
+    color: var(--accent-blue);
+}
+
+.phase-pill.pill-active .pill-num {
+    background: var(--accent-blue);
+    color: #fff;
+}
+
+.phase-pill.pill-done {
+    border-color: var(--accent-green);
+    background: rgba(25, 135, 84, 0.06);
+    color: var(--accent-green);
+}
+
+.phase-pill.pill-done .pill-num {
+    background: var(--accent-green);
+    color: #fff;
+    font-size: 0;
+}
+
+.phase-pill.pill-done .pill-num::after {
+    content: '✓';
+    font-size: 0.72rem;
+}
+
+/* ── Training result block ───────────────────────────────────────────────── */
+.ep-training-result {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--accent-green);
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+}
+
+.ep-result-title {
+    font-weight: 700;
+    color: var(--accent-green);
+    margin-bottom: 5px;
+    font-size: 0.78rem;
+}
+
+.ep-result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1px 0;
+    color: var(--text-secondary);
+}
+
+.ep-result-row.sub {
+    padding-left: 10px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.ep-result-row strong {
+    color: var(--text-primary);
+}
+
+/* ── Dynamic panel sections ──────────────────────────────────────────────── */
+.ep-section {
+    margin-bottom: 12px;
+}
+
+.ep-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.ep-desc {
+    font-size: 0.87rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.ep-formula-block {
+    background: #f0f4ff;
+    border: 1px solid #c7d7fd;
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    margin: 8px 0;
+}
+
+.ep-formula {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #0a58ca;
+    margin-bottom: 3px;
+}
+
+.ep-formula-sub {
+    font-size: 0.78rem;
+    color: #495057;
+    font-style: italic;
+}
+
+.ep-formula-block.ep-highlight-green {
+    background: #f0fff4;
+    border-color: #a3cfbb;
+    color: #155724;
+}
+
+.ep-formula-block.ep-highlight-orange {
+    background: #fff9db;
+    border-color: #ffc107;
+    color: #856404;
+}
+
+/* Value rows grid */
+.ep-value-grid {
+    margin: 8px 0;
+}
+
+.ep-vrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 7px;
+    border-radius: 3px;
+    font-size: 0.82rem;
+    margin-bottom: 3px;
+    background: var(--bg-secondary);
+}
+
+.ep-vrow.ep-best {
+    background: rgba(25, 135, 84, 0.08);
+    border-left: 3px solid var(--accent-green);
+    font-weight: 600;
+}
+
+.ep-val {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-weight: 700;
+    color: #6f42c1;
+    font-size: 0.83rem;
+}
+
+.ep-val.ep-green {
+    color: #155724;
+}
+
+.ep-val.ep-red {
+    color: #842029;
+}
+
+.ep-green {
+    color: #155724;
+}
+
+.ep-red {
+    color: #842029;
+}
+
+.ep-hint {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 8px;
+}
+
+/* Legend rows inside dyn panel */
+.ep-legend-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.ep-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+.ep-line {
+    width: 20px;
+    height: 3px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+/* ── Weight update cards ─────────────────────────────────────────────────── */
+.ep-update-card {
+    background: #f8f9fa;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    margin-bottom: 7px;
+    font-size: 0.82rem;
+}
+
+.ep-uc-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 5px;
+}
+
+.ep-uc-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 3px;
+}
+
+.ep-old {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-weight: 600;
+    color: #842029;
+    font-size: 0.83rem;
+}
+
+.ep-arrow {
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.ep-new {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-weight: 700;
+    color: #155724;
+    font-size: 0.83rem;
+}
+
+.ep-uc-math {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* ══ Output Comparison Panel ════════════════════════════════════════════════ */
+#outputComparisonPanel {
+    margin: 0;
+    padding: 6px var(--spacing-md) 4px;
+}
+
+.ocp-wrap {
+    background: linear-gradient(135deg, #fffde7, #fff8e1);
+    border: 1.5px solid #ffc107;
+    border-radius: var(--radius-md);
+    padding: 10px 14px 8px;
+}
+
+.ocp-heading {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #856404;
+    margin-bottom: 2px;
+}
+
+.ocp-sub {
+    font-size: 0.75rem;
+    color: #a07c00;
+    margin-bottom: 8px;
+    font-style: italic;
+}
+
+.ocp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.79rem;
+    margin-bottom: 6px;
+}
+
+.ocp-table th {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    text-align: left;
+    padding: 3px 5px;
+    border-bottom: 1px solid #e9c46a;
+    text-transform: uppercase;
+}
+
+.ocp-table td {
+    padding: 3px 5px;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    border-bottom: 1px solid rgba(255, 193, 7, 0.18);
+}
+
+.ocp-best {
+    background: rgba(25, 135, 84, 0.07);
+    font-weight: 700;
+}
+
+.ocp-pos {
+    color: var(--accent-green);
+    font-weight: 700;
+}
+
+.ocp-neg {
+    color: var(--accent-red);
+    font-weight: 700;
+}
+
+.ocp-loss {
+    font-size: 0.8rem;
+    color: #856404;
+    font-weight: 600;
+    text-align: right;
+}
+
+/* ══ Left sidebar legend tweaks ═════════════════════════════════════════════ */
+.legend-section {
+    margin-bottom: 10px;
+}
+
+.legend-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+}
+
+.legend-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.leg-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.leg-line {
+    width: 20px;
+    height: 3px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.legend-tip {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 6px;
+}
+
+.reset-btn {
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* ══ SVG info card (in networkRenderer) — text falls on SVG canvas, no extra CSS needed ══ */
+
+/* ══ Backprop sub-step bar ══════════════════════════════════════════════════ */
+.bp-substeps-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px 12px;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    flex-wrap: wrap;
+}
+
+.bp-substep {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--bg-tertiary);
+    border: 1.5px solid var(--border-color);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: all 0.25s ease;
+}
+
+.bp-substep-arrow {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.bps-num {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+}
+
+.bps-label {
+    white-space: nowrap;
+}
+
+.bp-substep.sub-step-active {
+    border-color: var(--accent-blue);
+    background: rgba(13, 110, 253, 0.07);
+    color: var(--accent-blue);
+}
+
+.bp-substep.sub-step-active .bps-num {
+    background: var(--accent-blue);
+    color: #fff;
+}
+
+.bp-substep.sub-step-done {
+    border-color: var(--accent-green);
+    background: rgba(25, 135, 84, 0.06);
+    color: var(--accent-green);
+}
+
+.bp-substep.sub-step-done .bps-num {
+    background: var(--accent-green);
+    color: #fff;
+    font-size: 0;
+}
+
+.bp-substep.sub-step-done .bps-num::after {
+    content: '✓';
+    font-size: 0.72rem;
+}
+
+/* ==========================================================================
+   BACKPROPAGATION REDESIGN — Sub-step pills
+   ========================================================================== */
+
+.bp-substep-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 8px;
+    margin-left: 4px;
+    padding: 10px 12px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.bp-ss {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.bp-ss-num {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.bp-ss-lbl { white-space: nowrap; }
+
+/* States */
+.bp-ss-pending {
+    background: var(--bg-tertiary);
+    color: var(--text-muted);
+}
+.bp-ss-pending .bp-ss-num {
+    background: var(--border-color);
+    color: var(--text-muted);
+}
+
+.bp-ss-active {
+    background: rgba(13,110,253,0.12);
+    color: var(--accent-blue);
+    box-shadow: 0 0 0 2px rgba(13,110,253,0.3);
+}
+.bp-ss-active .bp-ss-num {
+    background: var(--accent-blue);
+    color: #fff;
+}
+
+.bp-ss-done {
+    background: rgba(25,135,84,0.1);
+    color: var(--accent-green);
+}
+.bp-ss-done .bp-ss-num {
+    background: var(--accent-green);
+    color: #fff;
+    font-size: 0;
+}
+.bp-ss-done .bp-ss-num::after { content: '✓'; font-size: 0.7rem; }
+
+.bp-ss-sep {
+    color: var(--border-color);
+    font-size: 0.8rem;
+    font-weight: 300;
+}
+
+/* ==========================================================================
+   SINGLE NEURON DIAGRAM
+   ========================================================================== */
+
+.snd-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.snd-mode-badge {
+    display: inline-block;
+    background: #0d6efd;
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.snd-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+.snd-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: 100%;
+    padding: 10px 0;
+}
+
+/* Boxes */
+.snd-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--border-color);
+    background: #fff;
+    border-radius: var(--radius-md);
+    padding: 14px 20px;
+    min-width: 110px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.35s ease;
+}
+.snd-neuron {
+    border-radius: 50% !important;
+    width: 110px;
+    height: 110px;
+    padding: 0;
+}
+.snd-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+}
+.snd-val {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+/* Connectors */
+.snd-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 120px;
+    flex-shrink: 0;
+}
+.snd-arrow {
+    font-size: 2.2rem;
+    color: var(--border-color);
+    line-height: 1;
+    transition: color 0.35s ease;
+}
+.snd-weight-badge {
+    position: absolute;
+    top: -22px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    background: #fff;
+    border: 1.5px solid var(--border-color);
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    transition: all 0.35s ease;
+    color: var(--text-secondary);
+}
+
+/* Targets + Error row */
+.snd-target-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 24px;
+    transition: opacity 0.5s;
+}
+.snd-target { border-color: #f59e0b !important; background: #fffbeb; }
+.snd-target .snd-label { color: #b45309; }
+.snd-target .snd-val  { color: #b45309; }
+
+.snd-loss-badge {
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #dc3545;
+    padding: 12px 20px;
+    background: #fef2f2;
+    border: 2px dashed #fca5a5;
+    border-radius: var(--radius-md);
+}
+
+/* Gradient row */
+.snd-grad-row {
+    margin-top: 18px;
+    justify-content: center;
+}
+.snd-grad-arrow {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fd7e14;
+    background: #fff7ed;
+    border: 2px solid #fed7aa;
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    letter-spacing: 0.02em;
+}
+.snd-grad-num {
+    font-family: monospace;
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+/* Diagram highlight states */
+.snd-active  { border-color: #0d6efd !important; box-shadow: 0 0 0 4px rgba(13,110,253,0.18) !important; }
+.snd-error   { border-color: #dc3545 !important; box-shadow: 0 0 0 4px rgba(220,53,69,0.18) !important; }
+.snd-success { border-color: #198754 !important; box-shadow: 0 0 0 4px rgba(25,135,84,0.18) !important; }
+
+.snd-conn-active   .snd-arrow { color: #0d6efd; }
+.snd-conn-backward .snd-arrow { color: #fd7e14; transform: scaleX(-1); }
+.snd-conn-updated  .snd-arrow { color: #198754; }
+
+.snd-w-old { text-decoration: line-through; color: #dc3545; margin-right: 6px; font-size: 0.9rem; }
+.snd-w-new { color: #198754; font-size: 1.1rem; }
+
+/* ==========================================================================
+   RIGHT PANEL — Backprop Step Content
+   ========================================================================== */
+
+.bp-step-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+}
+.bp-step-badge {
+    display: inline-block;
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    align-self: flex-start;
+}
+.bp-step-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+/* Formula block */
+.bp-formula-block {
+    background: var(--bg-secondary);
+    border-left: 3px solid #0d6efd;
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin-bottom: 12px;
+}
+.bp-formula-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #0d6efd;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 6px;
+}
+.bp-formula-text {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.8;
+}
+
+/* Value / calculation block */
+.bp-value-block {
+    background: #fff8f0;
+    border-left: 3px solid #fd7e14;
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin-bottom: 12px;
+}
+.bp-value-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #fd7e14;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 6px;
+}
+.bp-value-text {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    line-height: 1.7;
+}
+
+/* Explanation block */
+.bp-explanation-block {
+    background: #f0fdf4;
+    border-left: 3px solid #198754;
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin-bottom: 14px;
+}
+.bp-expl-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #198754;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 6px;
+}
+.bp-expl-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* Extra block (chain rule, etc.) */
+.bp-extra-block { margin-bottom: 12px; }
+
+.bp-chain-rule {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    background: var(--bg-tertiary);
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    font-family: monospace;
+    flex-wrap: wrap;
+}
+.bp-chain-val {
+    font-weight: 700;
+    color: #fd7e14;
+    font-size: 1rem;
+}
+
+/* Next / switch button */
+.bp-next-btn {
+    display: block;
+    width: 100%;
+    padding: 11px 18px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: var(--accent-blue);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 4px;
+}
+.bp-next-btn:hover { background: var(--accent-blue-dark); transform: translateY(-1px); }
+.bp-full-net-btn  { background: #6f42c1; }
+.bp-full-net-btn:hover { background: #5a32a3; }
+
+/* Weight Update Table */
+.bp-wt-table-wrap { margin-bottom: 16px; }
+.bp-wt-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    font-family: 'Fira Code', monospace;
+    margin-top: 8px;
+}
+.bp-wt-table th {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    padding: 6px 8px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--border-color);
+}
+.bp-wt-table td {
+    padding: 7px 8px;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-primary);
+}
+.bp-wt-table tr:last-child td { border-bottom: none; }
+.bp-wt-table tr:hover td { background: var(--bg-secondary); }
+
+/* Switch to Full Network button (in center panel) */
+.bp-switch-btn {
+    padding: 11px 28px;
+    border: 2px solid #6f42c1;
+    border-radius: var(--radius-md);
+    background: rgba(111,66,193,0.08);
+    color: #6f42c1;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-top: auto;
+}
+.bp-switch-btn:hover {
+    background: #6f42c1;
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(111,66,193,0.35);
+}
+
+/* ==========================================================================
+   VERTICAL BACKPROP STEP LIST
+   ========================================================================== */
+
+.bpvs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 6px 0 6px 4px;
+    border-left: 2px solid var(--border-color);
+    padding-left: 0;
+}
+
+.bpvs-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    margin-left: -2px;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.bpvs-item:hover { background: var(--bg-secondary); }
+
+.bpvs-num {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+}
+
+.bpvs-label { white-space: nowrap; }
+
+/* States */
+.bpvs-pending {
+    color: var(--text-muted);
+    border-left-color: transparent;
+}
+.bpvs-pending .bpvs-num {
+    background: var(--bg-tertiary);
+    color: var(--text-muted);
+}
+
+.bpvs-active {
+    color: var(--accent-blue);
+    border-left-color: var(--accent-blue);
+    background: rgba(13,110,253,0.06);
+    font-weight: 700;
+}
+.bpvs-active .bpvs-num {
+    background: var(--accent-blue);
+    color: #fff;
+}
+
+.bpvs-done {
+    color: var(--accent-green);
+    border-left-color: var(--accent-green);
+}
+.bpvs-done .bpvs-num {
+    background: var(--accent-green);
+    color: #fff;
+}
+
+/* ==========================================================================
+   SINGLE NEURON WRAPPER — CENTERED
+   ========================================================================== */
+
+.sn-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 1;
+}
+
+.snd-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.snd-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Centered diagram row */
+.snd-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 840px;
+}
+
+.snd-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: 100%;
+    padding: 10px 0;
+}
+
+/* Small sub-label inside neuron box */
+.snd-sub {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    font-family: 'Fira Code', monospace;
+}
+
+/* ==========================================================================
+   SECTION LABELS (unified across all blocks)
+   ========================================================================== */
+
+.bp-section-label {
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+}
+
+.bp-formula-block .bp-section-label { color: #0d6efd; }
+.bp-value-block   .bp-section-label { color: #fd7e14; }
+.bp-result-block  .bp-section-label { color: #198754; }
+.bp-explanation-block .bp-section-label { color: #198754; }
+.bp-wt-table-wrap .bp-section-label { color: var(--text-secondary); }
+
+/* ==========================================================================
+   RESULT BLOCK (new)
+   ========================================================================== */
+
+.bp-result-block {
+    background: #f0fdf4;
+    border-left: 3px solid #198754;
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin-bottom: 12px;
+}
+
+.bp-result-text {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    line-height: 1.8;
+}
+
+/* ==========================================================================
+   LEGEND LIST
+   ========================================================================== */
+
+.legend-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.legend-list li { display: flex; align-items: center; gap: 8px; }
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.legend-line {
+    width: 20px;
+    height: 3px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   RESULT CARD (default panel)
+   ========================================================================== */
+
+.result-card {
+    background: var(--bg-tertiary);
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--accent-green);
+}
+
+/* ==========================================================================
+   BACKPROP RIGHT PANEL — Step blocks
+   ========================================================================== */
+
+.bp-step-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 14px;
+}
+
+.bp-step-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    width: fit-content;
+}
+
+.bp-step-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.bp-formula-block {
+    background: #f0f4ff;
+    border: 1px solid #c7d7fd;
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    margin-bottom: 10px;
+}
+
+.bp-formula-text {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.88rem;
+    color: #0a3880;
+    line-height: 1.8;
+}
+
+.bp-value-block {
+    background: #fff8ec;
+    border: 1px solid #ffd09e;
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    margin-bottom: 10px;
+}
+
+.bp-value-text {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.86rem;
+    color: var(--text-primary);
+    line-height: 1.9;
+}
+
+.bp-explanation-block {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border-light);
+}
+
+.bp-expl-text {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin: 0;
+}
+
+.bp-extra-block {
+    margin-bottom: 10px;
+}
+
+/* Chain rule visual row */
+.bp-chain-rule {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+}
+
+.bp-chain-val {
+    font-weight: 700;
+    color: #fd7e14;
+}
+
+/* Weight update table */
+.bp-wt-table-wrap {
+    margin-bottom: 12px;
+}
+
+.bp-wt-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+}
+
+.bp-wt-table th {
+    background: var(--bg-secondary);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 5px 8px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.bp-wt-table td {
+    padding: 5px 8px;
+    border-bottom: 1px solid var(--border-light);
+    font-family: 'Fira Code', monospace;
+}
+
+/* Next step / switch buttons */
+.bp-next-btn {
+    display: block;
+    width: 100%;
+    padding: 10px 16px;
+    background: var(--accent-blue);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 4px;
+    flex-shrink: 0;
+    transition: background 0.2s ease;
+}
+
+.bp-next-btn:hover { background: var(--accent-blue-dark); }
+.bp-next-btn.bp-full-net-btn { background: #6f42c1; }
+.bp-next-btn.bp-full-net-btn:hover { background: #552ca5; }
+
+.bp-switch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #6f42c1;
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s ease;
+}
+
+.bp-switch-btn:hover { background: #552ca5; }
+
+/* Ensure right panel doesn't clip buttons */
+.explanation-content {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding-bottom: 16px;
+}
+
+#bpRightPanel,
+#activationRightPanel,
+#forwardPassPanel {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    flex: 1;
+}
+
+/* ==========================================================================
+   SINGLE NEURON DIAGRAM — boxes and connectors
+   ========================================================================== */
+
+.snd-mode-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    background: #0d6efd;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.snd-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    min-height: 80px;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border-color);
+    padding: 10px 8px;
+    background: #fff;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.snd-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+
+.snd-val {
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-family: 'Fira Code', monospace;
+    color: var(--text-primary);
+}
+
+.snd-input   { border-color: #0d6efd; background: #f0f4ff; }
+.snd-neuron  { border-color: #6f42c1; background: #f8f4ff; }
+.snd-output  { border-color: #adb5bd; background: #f8f9fa; }
+.snd-target  { border-color: #198754; background: #f0fdf4; width: 110px; }
+
+.snd-active  { border-color: #0d6efd !important; box-shadow: 0 0 0 3px rgba(13,110,253,0.15); }
+.snd-error   { border-color: #dc3545 !important; background: #fff5f5 !important; }
+.snd-success { border-color: #198754 !important; background: #f0fdf4 !important; }
+
+.snd-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+    gap: 4px;
+    min-width: 64px;
+    transition: all 0.3s ease;
+}
+
+.snd-weight-badge {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 8px;
+    background: #e9ecef;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.snd-arrow {
+    font-size: 1.4rem;
+    color: var(--text-muted);
+}
+
+.snd-conn-active   .snd-arrow { color: #0d6efd; }
+.snd-conn-backward .snd-arrow { color: #fd7e14; }
+.snd-conn-updated  .snd-arrow { color: #198754; }
+
+.snd-target-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 12px;
+    justify-content: center;
+}
+
+.snd-loss-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid #dc3545;
+    background: #fff5f5;
+    color: #dc3545;
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-family: 'Fira Code', monospace;
+    transition: all 0.4s ease;
+}
+
+.snd-grad-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.snd-grad-arrow {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fd7e14;
+    font-family: 'Fira Code', monospace;
+    background: #fff8ec;
+    border: 1px solid #ffd09e;
+    padding: 5px 14px;
+    border-radius: 8px;
+}
+
+.snd-grad-num {
+    font-weight: 700;
+    color: #dc6b00;
+}
+
+.snd-w-old {
+    text-decoration: line-through;
+    color: #dc3545;
+    font-family: 'Fira Code', monospace;
+}
+
+.snd-w-new {
+    color: #198754;
+    font-family: 'Fira Code', monospace;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   STATUS PANEL (shown during forward pass animation)
+   ========================================================================== */
+
+.status-content {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.status-content p { margin: 0; }
+
+.status-content code {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    background: #f0f4ff;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.86rem;
+    color: #0a3880;
+}
+
+/* ==========================================================================
+   BACKPROP VERTICAL STEP LIST
+   ========================================================================== */
+
+.bpvs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px 0 6px 16px;
+}
+
+.bpvs-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: var(--radius-sm);
+    border-left: 3px solid transparent;
+    cursor: pointer;
+    font-size: 0.84rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    color: var(--text-muted);
+}
+
+.bpvs-item:hover { background: var(--bg-secondary); }
+
+.bpvs-num {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: var(--bg-tertiary);
+    flex-shrink: 0;
+}
+
+.bpvs-active {
+    color: var(--accent-blue);
+    border-left-color: var(--accent-blue);
+    background: rgba(13,110,253,0.05);
+}
+
+.bpvs-active .bpvs-num {
+    background: var(--accent-blue);
+    color: #fff;
+}
+
+.bpvs-done {
+    color: var(--accent-green);
+    border-left-color: var(--accent-green);
+}
+
+.bpvs-done .bpvs-num {
+    background: var(--accent-green);
+    color: #fff;
+}
+
+/* ==========================================================================
+   ACTIVATION FUNCTION VIEW (center panel)
+   ========================================================================== */
+
+/* Neuron transform diagram */
+.act-neuron-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 8px 0;
+    width: 100%;
+    max-width: 560px;
+}
+
+.act-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    min-height: 90px;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border-color);
+    padding: 12px 10px;
+    background: #fff;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.act-box-input  { border-color: #6f42c1; background: #f8f4ff; }
+.act-box-output { border-color: #198754; background: #f0fdf4; }
+
+.act-box-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+
+.act-box-val {
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Fira Code', monospace;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.act-box-sub {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.act-arrow-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    gap: 2px;
+}
+
+.act-fn-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #0d6efd;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.act-arrow {
+    font-size: 1.8rem;
+    color: var(--text-muted);
+    line-height: 1;
+}
+
+.act-fn-formula {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.78rem;
+    color: #6f42c1;
+    font-weight: 600;
+}
+
+/* Override old #activationPlot height restriction */
+#activationPlot {
+    height: 300px !important;
+    width: 480px !important;
+    max-width: 100%;
+}
+
+/* =============================================================================
+   FORWARD PASS — Persistent Step Cards
+   ============================================================================= */
+
+.fp-steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.fp-step-card {
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: var(--bg-primary);
+}
+
+.fp-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.fp-card-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.fp-card-label {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+}
+
+.fp-card-body {
+    padding: 10px 14px;
+    font-size: 0.84rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+/* Active state — highlighted card */
+.fp-step-active {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+}
+.fp-step-active .fp-card-header {
+    background: rgba(13, 110, 253, 0.07);
+    border-bottom-color: rgba(13, 110, 253, 0.2);
+}
+.fp-step-active .fp-card-num {
+    background: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+}
+.fp-step-active .fp-card-label {
+    color: #0d6efd;
+}
+.fp-step-active .fp-card-body {
+    color: var(--text-primary);
+}
+
+/* Done state — completed card */
+.fp-step-done {
+    border-color: #198754;
+    opacity: 0.85;
+}
+.fp-step-done .fp-card-header {
+    background: rgba(25, 135, 84, 0.06);
+    border-bottom-color: rgba(25, 135, 84, 0.2);
+}
+.fp-step-done .fp-card-num {
+    background: #198754;
+    border-color: #198754;
+    color: #fff;
+    font-size: 0;
+}
+.fp-step-done .fp-card-num::after {
+    content: '✓';
+    font-size: 0.72rem;
+}
+.fp-step-done .fp-card-label {
+    color: #198754;
+}
+
+/* Inactive (upcoming) state */
+.fp-step-inactive {
+    opacity: 0.48;
+}
+.fp-step-inactive .fp-card-body {
+    display: none;
+}
+
+/* =============================================================================
+   ACTIVATION RIGHT PANEL — Step Cards
+   ============================================================================= */
+
+.act-step-card {
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-md);
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: var(--bg-primary);
+}
+
+.act-step-num {
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #fff;
+    background: #0d6efd;
+    padding: 3px 10px;
+    display: inline-block;
+    border-radius: 0 0 var(--radius-sm) 0;
+}
+
+.act-step-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 8px 14px 4px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.act-step-body {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+}
+
+.act-val-display {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 1.05rem;
+    font-weight: 700;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 8px 14px;
+    text-align: center;
+    margin-top: 4px;
+    color: var(--text-primary);
+}
+
+.act-formula-box {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #0d6efd;
+    background: rgba(13, 110, 253, 0.06);
+    border: 1.5px solid rgba(13, 110, 253, 0.25);
+    border-radius: var(--radius-sm);
+    padding: 8px 14px;
+    text-align: center;
+}
+
+/* =============================================================================
+   BACKPROP RIGHT PANEL — Improved block spacing & sizing
+   ============================================================================= */
+
+/* Increase result block prominence */
+.bp-result-block {
+    background: #f8fff8;
+    border: 2px solid #198754;
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.bp-section-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.bp-result-text {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.9;
+    font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+/* Even vertical spacing between all blocks */
+.bp-formula-block,
+.bp-value-block,
+.bp-explanation-block {
+    margin-bottom: 16px;
+}
+
+/* Uniform padding for formula and value blocks */
+.bp-formula-block,
+.bp-value-block {
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+}
+
+.bp-formula-text {
+    font-size: 0.95rem;
+    line-height: 1.9;
+}
+
+.bp-value-text {
+    font-size: 0.9rem;
+    line-height: 1.85;
+}
+
+#bpRightPanel {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 8px;
+}
+
+/* =============================================================================
+   SINGLE NEURON VIEW — Vertical Pipeline (snv-*)
+   ============================================================================= */
+
+/* Outer container — centers the whole pipeline */
+.snv-pipeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 16px 0 24px;
+    gap: 0;
+}
+
+/* ── Uniform block card ── */
+.snv-block {
+    width: 100%;
+    padding: 14px 22px;
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    text-align: center;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease,
+                opacity 0.3s ease, background 0.3s ease;
+}
+
+/* Label (small caps above the value) */
+.snv-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+/* Main value text */
+.snv-value {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+/* Sub text below value */
+.snv-sub {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* ── Arrow between blocks ── */
+.snv-arrow {
+    font-size: 1.4rem;
+    color: var(--border-color);
+    line-height: 1;
+    padding: 4px 0;
+    transition: color 0.3s ease, opacity 0.3s ease;
+    user-select: none;
+}
+
+/* ── Block color themes (border-left accent) ── */
+.snv-block-input   { border-left: 4px solid #0d6efd; }
+.snv-block-weight  { border-left: 4px solid #6f42c1; }
+.snv-block-neuron  { border-left: 4px solid #0dcaf0; }
+.snv-block-output  { border-left: 4px solid #6f42c1; }
+.snv-block-target  { border-left: 4px solid #f59e0b; }
+.snv-block-loss    { border-left: 4px solid #dc3545; }
+.snv-block-grad    { border-left: 4px solid #fd7e14; }
+.snv-block-updated { border-left: 4px solid #198754; }
+
+/* ── State: FADED (not yet relevant) ── */
+.snv-faded {
+    opacity: 0.3;
+    filter: grayscale(40%);
+}
+
+/* ── State: ACTIVE (currently computing) ── */
+.snv-active {
+    border-color: #0d6efd !important;
+    background: rgba(13, 110, 253, 0.05) !important;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.18), 0 2px 8px rgba(0,0,0,0.08) !important;
+}
+.snv-active .snv-label { color: #0d6efd; }
+
+/* ── State: DONE (completed, stays visible) ── */
+.snv-done {
+    border-color: #198754 !important;
+    background: rgba(25, 135, 84, 0.04) !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+}
+.snv-done .snv-label { color: #198754; }
+
+/* ── State: ERROR (output vs target mismatch) ── */
+.snv-error {
+    border-color: #dc3545 !important;
+    background: rgba(220, 53, 69, 0.05) !important;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.18) !important;
+}
+.snv-error .snv-label { color: #dc3545; }
+
+/* ── State: SUCCESS (weight updated, loss reduced) ── */
+.snv-success {
+    border-color: #198754 !important;
+    background: rgba(25, 135, 84, 0.08) !important;
+    box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.22) !important;
+}
+.snv-success .snv-label { color: #198754; }
+
+/* ── State: GRADIENT HIGHLIGHT (orange — backprop signal) ── */
+.snv-highlight-grad {
+    border-color: #fd7e14 !important;
+    background: rgba(253, 126, 20, 0.06) !important;
+    box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.2) !important;
+}
+.snv-highlight-grad .snv-label { color: #fd7e14; }
+
+/* Active arrow becomes colored when shown */
+.snv-arrow:not(.snv-faded) { color: #adb5bd; }
+
+/* Updated weight old/new styling */
+.snv-old {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    color: #dc3545;
+    text-decoration: line-through;
+    margin-right: 4px;
+    font-size: 0.9em;
+}
+.snv-new {
+    color: #198754;
+    font-size: 1.05em;
+}
+
+
