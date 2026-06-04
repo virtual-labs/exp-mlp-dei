@@ -8,7 +8,7 @@
 
 ### About the Experiment 
 
-This experiment provides an interactive simulation of the Multi-Layer Perceptron (MLP), a fundamental neural network architecture used for supervised learning. Students will explore how MLPs learn to classify complex data patterns through multiple layers of neurons and backpropagation.
+This experiment provides an interactive simulation of the **Feedforward Neural Network (Multi-Layer Perceptron - MLP)**, a fundamental architecture in deep learning used for supervised learning tasks. The MLP consists of an input layer, one or more hidden layers with ReLU activation functions, and an output layer that learns to map input features to class predictions through forward propagation and backpropagation. Students will train the network on the Iris dataset, visualize how information flows through layers during forward and backward passes, and understand how optimization algorithms adjust weights to minimize classification error.
 
 <b>Name of Developer | <b> Shabd Sahni
 :--|:--|
